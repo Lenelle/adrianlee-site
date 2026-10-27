@@ -1,0 +1,893 @@
+AGENTIC AI SOCIAL & CUSTOMER SERVICERESILIENCE PLAYBOOK
+
+Defending AI agents against inference abuse, context pollution, tool abuse and human-escalation exhaustion
+
+A cross-platform framework for customer-service, community and social AI deployments
+
+Version 1.0 | August 2026
+
+Developed by Adrian Lee
+
+1. Executive Summary
+
+AI agents are moving beyond traditional chatbots. In customer service and online communities, agents can continuously observe messages, determine whether a response is required, retrieve information, call APIs, execute workflows, moderate content and escalate cases to humans. This creates significant efficiency opportunities, but it also creates a new class of operational and security risk: an adversary may attempt to make the target's AI perform unnecessary work.
+
+This playbook treats the problem as a resource-governance issue rather than merely a spam problem. The protected resources are not only tokens and GPU capacity, but also API capacity, knowledge-retrieval capacity, moderation capacity, human-review time and organizational attention.
+
+Core principle: An AI agent should never have unlimited authority, unlimited compute, unlimited tool access or unlimited ability to consume scarce human capacity.
+
+Risk
+
+What the attacker is trying to consume
+
+Primary defense
+
+Inference abuse
+
+Tokens / GPU time / API spend
+
+Compute budgets + model routing
+
+Engagement manipulation
+
+Agent attention
+
+Engagement governor + risk scoring
+
+Context pollution
+
+Context window / retrieval quality
+
+Context isolation + relevance filtering
+
+Tool amplification
+
+Backend/API resources
+
+Deterministic authorization + tool budgets
+
+Human escalation exhaustion
+
+Reviewer minutes
+
+Escalation governance + clustering
+
+Coordinated abuse
+
+System capacity across identities
+
+Cross-account behavioral correlation
+
+Community manipulation
+
+Trust and information quality
+
+Source weighting + moderation controls
+
+2. Scope: Where This Threat Model Applies
+
+The same underlying risk appears wherever an AI agent is exposed to ongoing human or automated interaction. The platform matters less than the interaction mechanics.
+
+Environment
+
+Typical AI behavior
+
+Exposure
+
+Customer-service portal
+
+Answers authenticated customer requests and performs account actions
+
+High
+
+Discord
+
+Monitors channels, answers questions, moderates or triggers workflows
+
+Very high
+
+Telegram
+
+Responds in groups, support channels or direct messages
+
+Very high
+
+Reddit / forums
+
+Reads threads, answers questions or summarizes discussions
+
+High
+
+Social community platforms
+
+Monitors comments, mentions and community activity
+
+High
+
+Messaging communities
+
+Responds to ongoing conversations and support requests
+
+Very high
+
+Slack / workplace communities
+
+Answers questions and accesses organizational knowledge
+
+High
+
+Live-chat platforms
+
+Handles real-time customer conversations
+
+High
+
+Important: The playbook is platform-agnostic. Discord and Telegram are examples, not the limits of the threat model.
+
+3. The Expanded Threat Model
+
+Traditional spam attempts to consume attention. Agentic abuse can consume computational and operational resources while appearing superficially legitimate.
+
+3.1 The resource chain
+
+A message enters the platform.
+
+A lightweight or expensive AI component determines whether the message deserves a response.
+
+The agent retrieves conversation or knowledge context.
+
+The agent reasons over that context.
+
+The agent invokes one or more tools or backend systems.
+
+The agent generates a response and may continue monitoring the resulting conversation.
+
+If the agent cannot resolve the issue, the workflow may escalate to a human.
+
+An attacker does not necessarily need to compromise any system. If the agent is designed to perform these actions automatically, the attacker may attempt to induce legitimate system behavior at scale.
+
+3.2 Five attack surfaces
+
+Attack surface
+
+Potential impact
+
+Compute
+
+Higher inference usage, GPU saturation or cloud API spend
+
+Context
+
+Larger prompts, repeated history processing and lower signal-to-noise
+
+Tools
+
+Unnecessary CRM, payment, search, ticketing or API activity
+
+Humans
+
+Large numbers of escalations or moderation cases
+
+Community
+
+Information pollution, confusion, trust erosion or moderation overload
+
+4. Why Social and Community Platforms Can Be More Exposed
+
+A traditional support portal often begins with an authenticated customer session. A community agent may instead sit inside a public or semi-public conversation stream and continuously decide whether to engage. This creates a wider surface for automated interaction.
+
+Characteristic
+
+Portal
+
+Community / social agent
+
+Exposure
+
+Session-based
+
+Continuous or channel-wide
+
+Audience
+
+Usually authenticated
+
+May be public or semi-public
+
+Message volume
+
+Relatively bounded
+
+Potentially very high
+
+Context
+
+Customer-specific
+
+Shared community context
+
+Automation
+
+Mostly customer-driven
+
+User agents and bots may interact
+
+Moderation interaction
+
+Separate workflow
+
+Often integrated with the AI
+
+Context pollution
+
+Moderate
+
+Potentially high
+
+4.1 The 'lurking agent' problem
+
+A continuously monitoring agent creates a fundamental design question: should every message be considered for expensive AI processing? The answer should be no. Reading can be cheap; autonomous reasoning and tool use should be selective.
+
+Preferred pattern: Every message → cheap triage → selective reasoning → bounded action.
+
+5. Threat Taxonomy
+
+Threat
+
+Mechanism
+
+Primary resource at risk
+
+1. Inference-cost exhaustion
+
+Inducing expensive agent workflows at scale.
+
+Variable cloud spend or finite GPU capacity.
+
+2. Engagement manipulation
+
+Repeatedly creating plausible reasons for the agent to respond.
+
+Agent attention and compute.
+
+3. Context-window pollution
+
+Increasing irrelevant or repetitive context.
+
+Higher token use and lower answer quality.
+
+4. Retrieval pollution
+
+Introducing misleading or low-quality material into accessible information sources.
+
+Poor answers and additional verification work.
+
+5. Tool amplification
+
+Causing unnecessary calls to business systems.
+
+API capacity, latency and operational side effects.
+
+6. Human escalation exhaustion
+
+Generating cases that trigger manual review.
+
+Reviewer capacity and service queues.
+
+7. Coordinated multi-account abuse
+
+Distributing activity across many identities.
+
+Difficulty of account-level controls.
+
+8. Agent-to-agent interaction
+
+Automated systems interacting at scale.
+
+Rapid amplification and ambiguous intent.
+
+9. Community trust manipulation
+
+Using AI-generated interactions to shape perceived consensus or information quality.
+
+Reputation and moderation burden.
+
+10. Runaway agent behavior
+
+Retries, loops or repeated tool calls caused by model/system failure.
+
+Unplanned resource consumption.
+
+6. Economics of Agentic Abuse
+
+The critical metric is not simply tokens per message. A short message can cause a large amount of downstream work. Conversely, a long message may be resolved cheaply by a lightweight model.
+
+Illustrative workload
+
+Total tokens / resolution
+
+Planning interpretation
+
+Simple
+
+2k–8k
+
+FAQ or narrow retrieval
+
+Moderate
+
+10k–30k
+
+Several retrieval/tool operations
+
+Complex
+
+50k–150k
+
+Multiple reasoning and verification steps
+
+Very complex
+
+150k–500k+
+
+Long context, retries or multiple tools
+
+These figures are planning ranges, not industry averages. Actual cost depends on model pricing, input/output mix, cached context, local inference, tool charges and infrastructure.
+
+6.1 Cost per successful resolution
+
+The correct business KPI is: total AI and operational cost divided by successfully resolved cases. An agent that uses more tokens but resolves far more work may be economically superior.
+
+Metric
+
+Meaning
+
+Token consumption
+
+Computational workload
+
+Inference cost
+
+Direct model expense
+
+Cost per resolution
+
+Economic efficiency
+
+Resolution rate
+
+Operational effectiveness
+
+Human minutes / case
+
+Residual labor cost
+
+Abuse cost
+
+Unproductive resource consumption
+
+7. Compute Governance
+
+Every agent session should have a bounded computational authority. A normalized internal metric such as Compute Cost Units (CCU) can simplify governance across different models and infrastructure.
+
+Signal
+
+Why it matters
+
+Input/output tokens
+
+Measures model workload
+
+Model tier
+
+More capable models can have higher economic weight
+
+Cached context
+
+Changes marginal inference cost
+
+Tool calls
+
+Captures downstream work
+
+Agent steps
+
+Detects unusually long workflows
+
+Retries/loops
+
+Detects runaway behavior
+
+Latency
+
+Signals capacity pressure
+
+Human escalation
+
+Measures consumption of scarce reviewer capacity
+
+State
+
+Automated response
+
+Green
+
+Continue within normal policy.
+
+Yellow
+
+Reduce context, route to cheaper model or restrict tools.
+
+Orange
+
+Stop expanding the workflow and attempt bounded resolution.
+
+Red
+
+Terminate autonomous execution and route to an appropriate controlled workflow.
+
+Do not publish a single deterministic threshold that tells outsiders exactly when an agent escalates. Use multiple internal signals and dynamic controls.
+
+8. The Conversation Engagement Governor
+
+For social and community agents, the first question should not be 'Can the model answer this?' It should be 'Should the organization spend agentic resources answering this?'
+
+Stage
+
+Decision
+
+Message arrives
+
+Receive and normalize
+
+Cheap triage
+
+Determine relevance, risk and likely complexity
+
+No response needed
+
+Ignore or use deterministic reaction
+
+Simple
+
+Use lightweight model/retrieval
+
+Useful but complex
+
+Invoke bounded agent
+
+High-impact
+
+Require stronger authorization or human review
+
+Suspicious
+
+Restrict expensive autonomy and route to abuse controls
+
+9. Context and Knowledge Protection
+
+Community agents face a special problem: shared conversation history can contain noise, repetition, misleading claims and adversarial content. The agent should not treat every nearby message as equally trustworthy context.
+
+Separate authoritative knowledge from conversational content.
+
+Assign trust and provenance to retrieved sources.
+
+Use relevance filtering before inserting community messages into context.
+
+Avoid replaying entire channel histories when a compact state representation is sufficient.
+
+Prevent untrusted user content from silently becoming persistent system knowledge.
+
+Log which sources materially influenced high-impact responses.
+
+10. Tool and Action Governance
+
+Agentic systems should treat tool access as a privilege, not a default capability. The model can propose an action; a deterministic policy layer should decide whether the action is authorized.
+
+Control
+
+Example
+
+Tool allowlist
+
+Agent may access order status but not arbitrary account administration.
+
+Parameter validation
+
+Reject malformed or out-of-policy tool arguments.
+
+Per-session tool budget
+
+Limit repeated calls.
+
+High-impact confirmation
+
+Require explicit confirmation or human authorization.
+
+Idempotency
+
+Prevent repeated execution of the same transaction.
+
+Audit trail
+
+Record actor, tool, parameters, result and policy decision.
+
+11. Protecting the Human Escalation Layer
+
+Human review is itself a finite resource. An attacker should not be able to turn an AI threshold into an unlimited human-work generator.
+
+Risky design
+
+Resilient design
+
+High token usage automatically creates a human ticket
+
+High cost triggers automated triage and risk scoring
+
+Every suspicious case enters the normal queue
+
+Suspicious cases enter a separate controlled queue
+
+One case = one investigation
+
+Cluster related cases and investigate patterns
+
+Human sees raw conversation only
+
+Human receives reason, evidence, agent actions and risk context
+
+No queue budget
+
+Set operational capacity and overflow policy
+
+12. Cross-Account and Coordinated Abuse Detection
+
+Account-level controls are insufficient when abuse is distributed. Defensive systems should look for correlated behavior without assuming that any single signal proves malicious intent.
+
+Signal family
+
+Examples
+
+Account
+
+Age, history, verification, reputation
+
+Behavior
+
+Velocity, repetition, session structure
+
+Content
+
+Similarity, unusual interaction patterns, repeated requests
+
+Resource use
+
+Compute cost, tool calls, escalation frequency
+
+Temporal
+
+Synchronized activity across accounts
+
+Platform
+
+Shared risk signals available to the platform
+
+Use these signals for risk-based controls and investigation. Avoid relying on a single identifier such as IP address.
+
+13. Cloud, Self-Hosted and Hybrid Architectures
+
+Architecture
+
+Primary risk
+
+Operational advantage
+
+Cloud inference
+
+Variable per-token or per-request cost
+
+Elastic capacity and frontier models
+
+Self-hosted inference
+
+Finite compute capacity
+
+Predictable marginal inference economics
+
+Hybrid inference
+
+Both variable and capacity costs
+
+Best flexibility and model routing options
+
+Self-hosting does not make inference free. It converts a portion of the problem from variable API spend to finite compute capacity, electricity, operations and opportunity cost.
+
+14. Reference Defensive Architecture
+
+Layer
+
+Function
+
+Edge / access
+
+Identity, bot signals, rate limits, account controls
+
+Engagement governor
+
+Decides whether expensive AI work is warranted
+
+Risk classifier
+
+Scores intent, complexity and abuse indicators
+
+Compute governor
+
+Sets model, context, tool and session budgets
+
+Agent runtime
+
+Performs bounded reasoning
+
+Policy engine
+
+Authorizes sensitive actions
+
+Knowledge layer
+
+Separates trusted sources from community content
+
+Telemetry
+
+Measures cost, performance, anomalies and outcomes
+
+Human operations
+
+Handles consequential exceptions
+
+Security operations
+
+Investigates coordinated abuse
+
+15. Incident Response SOP
+
+Step
+
+Defensive action
+
+Detect
+
+Alert on abnormal compute, tool calls, escalation volume or coordinated activity.
+
+Contain
+
+Reduce agent capability and route affected traffic to cheaper/deterministic workflows.
+
+Correlate
+
+Identify related accounts, sessions, channels and time patterns.
+
+Protect
+
+Prevent suspicious cases from consuming normal human queues.
+
+Investigate
+
+Separate external abuse from agent bugs or legitimate demand.
+
+Recover
+
+Restore normal routing gradually.
+
+Learn
+
+Update evaluations, budgets, routing and abuse controls.
+
+16. Minimum Monitoring Dashboard
+
+Area
+
+Metrics
+
+AI economics
+
+Inference cost, tokens, cost/resolution, cache rate
+
+Agent behavior
+
+Steps, tool calls, retries, loop rate, context size
+
+Community
+
+Messages observed, response rate, engagement rate
+
+Abuse
+
+Suspicious sessions, account clusters, anomalous compute
+
+Human
+
+Queue depth, human minutes, SLA, escalation reason
+
+Resilience
+
+Capacity headroom, fallback events, service degradation
+
+17. AI Governance and Accountability
+
+This problem should not be owned solely by the AI engineering team. It spans AI governance, security, trust and safety, customer operations, platform engineering and community management.
+
+Function
+
+Primary responsibility
+
+AI governance
+
+Risk appetite, oversight, accountability and policy
+
+Security
+
+Abuse detection, threat modeling and incident response
+
+Trust & safety
+
+Community integrity, moderation and coordinated abuse
+
+AI engineering
+
+Models, agents, routing and evaluation
+
+Platform engineering
+
+Capacity, rate limits, identity and reliability
+
+Customer operations
+
+Escalation and service quality
+
+Legal / compliance
+
+High-impact decisions and regulatory obligations
+
+18. Maturity Model
+
+Level
+
+State
+
+1. Reactive
+
+Basic bot, basic logs and manual intervention.
+
+2. Controlled
+
+Rate limits, model routing and bounded tools.
+
+3. Measured
+
+Per-session compute, cost and escalation telemetry.
+
+4. Resilient
+
+Behavioral correlation, protected queues and automated fail-down.
+
+5. Adaptive
+
+Continuous evaluation, adversarial testing and dynamic resource governance.
+
+19. 90-Day Implementation Roadmap
+
+Period
+
+Priority actions
+
+Days 0–30
+
+Inventory agents and tools; instrument cost/steps/tool calls; map escalation paths; identify high-impact actions.
+
+Days 31–60
+
+Deploy engagement governor, model routing, compute budgets, tool budgets and account-abuse controls.
+
+Days 61–90
+
+Add cross-account correlation, protected escalation queues, fail-down, tabletop exercises and adversarial evaluation.
+
+20. Tabletop Exercises
+
+Scenario
+
+Question to test
+
+Inference-cost spike
+
+Can the team distinguish demand growth, agent regression and abuse?
+
+Community message flood
+
+Can the agent ignore low-value traffic without harming legitimate users?
+
+Escalation flood
+
+Can suspicious cases be prevented from overwhelming human reviewers?
+
+Context pollution
+
+Can the system maintain authoritative knowledge despite noisy community content?
+
+Agent loop
+
+Can runaway tool use terminate automatically?
+
+Cloud model outage
+
+Can routine service continue using local or deterministic fallback?
+
+Coordinated account activity
+
+Can the organization correlate behavior without relying on one identifier?
+
+21. Twenty Design Principles
+
+1. AI should handle high-volume, low-risk work by default.
+
+2. Every agent should have bounded compute authority.
+
+3. Every agent should have bounded tool authority.
+
+4. Every public-facing agent should have an engagement governor.
+
+5. High compute should trigger controls, not automatically trigger humans.
+
+6. Human review must be treated as a finite operational resource.
+
+7. Community content should not automatically become trusted knowledge.
+
+8. Use the cheapest model capable of safely completing the task.
+
+9. Separate reasoning from authorization.
+
+10. Rate limits should be risk-based rather than one-size-fits-all.
+
+11. Cross-account behavior matters more than any single identifier.
+
+12. Self-hosted inference still has finite capacity.
+
+13. Measure cost per successful resolution.
+
+14. Measure human minutes per successful resolution.
+
+15. Design for agent loops and retries.
+
+16. Use deterministic fail-down paths.
+
+17. Protect high-impact actions with stronger controls.
+
+18. Log decisions, tool calls and escalation reasons.
+
+19. Continuously test the system against adaptive abuse.
+
+20. Optimize for resilience, not maximum autonomy.
+
+22. Conclusion
+
+The central risk of social and customer-service agents is not that AI will become too intelligent. It is that organizations may give autonomous systems too much unbounded access to computational, technical and human resources.
+
+The most resilient architecture is therefore AI-first but bounded: cheap triage before expensive reasoning, risk-based model routing, explicit compute and tool budgets, trusted knowledge separation, protected human escalation, cross-account behavioral analysis and deterministic recovery paths.
+
+Bottom line: The objective is not to stop every malicious interaction. The objective is to make abuse difficult to scale, economically unattractive and operationally containable while preserving legitimate AI innovation.
+
+23. References and Further Reading
+
+OWASP GenAI Security Project: LLM10:2025 Unbounded Consumptionhttps://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/
+
+OWASP GenAI Security Project: LLM06:2025 Excessive Agencyhttps://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+
+OWASP: Agentic AI Threats and Mitigationshttps://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
+
+NIST AI Risk Management Frameworkhttps://www.nist.gov/itl/ai-risk-management-framework
+
+NIST AI RMF Playbookhttps://www.nist.gov/itl/ai-risk-management-framework/nist-ai-risk-management-framework-playbook
+
+Cloudflare: Bot Management Reference Architecturehttps://developers.cloudflare.com/reference-architecture/diagrams/bots/bot-management/
+
+Cloudflare: Account Abuse Protectionhttps://developers.cloudflare.com/bots/account-abuse-protection/

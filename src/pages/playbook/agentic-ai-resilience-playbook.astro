@@ -1,0 +1,816 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const sections = [
+  { id: "exec-summary", title: "1. Executive Summary & Core Principle", tag: "Foundations" },
+  { id: "threat-model", title: "2. The Expanded Threat Model & Scope", tag: "Threat Model" },
+  { id: "threat-taxonomy", title: "3. 10-Vector Threat Taxonomy", tag: "Taxonomy" },
+  { id: "economics", title: "4. The Economics of Agentic Abuse", tag: "Economics" },
+  { id: "compute-governance", title: "5. Compute Governance & Model Routing", tag: "Controls" },
+  { id: "engagement-governor", title: "6. The Conversation Engagement Governor", tag: "Architecture" },
+  { id: "context-protection", title: "7. Context & Retrieval Knowledge Protection", tag: "Defense" },
+  { id: "tool-governance", title: "8. Tool, API & Action Governance", tag: "Security" },
+  { id: "human-escalation", title: "9. Protecting the Human Escalation Layer", tag: "Operations" },
+  { id: "coordinated-abuse", title: "10. Cross-Account & Coordinated Abuse Detection", tag: "Detection" },
+  { id: "defensive-architecture", title: "11. Reference Defensive Architecture", tag: "Architecture" },
+  { id: "incident-response", title: "12. Incident Response SOP & Monitoring", tag: "Operations" },
+  { id: "maturity-model", title: "13. 5-Stage Maturity Model", tag: "Governance" },
+  { id: "design-principles", title: "14. The 20 Resilience Design Principles", tag: "Principles" },
+];
+---
+
+<BaseLayout
+  title="Agentic AI Social & Customer Service Resilience Playbook"
+  description="Defending AI agents against inference abuse, context pollution, tool abuse, and human-escalation exhaustion. A cross-platform framework by Adrian Lee."
+>
+  <div class="playbook-doc" style="padding-top: calc(var(--nav-h) + var(--space-8));">
+    <!-- HERO HEADER -->
+    <header class="playbook-hero">
+      <div class="container">
+        <div class="hero-top">
+          <a href="/playbook" class="back-link">← Back to Playbook</a>
+          <div class="hero-badges">
+            <span class="badge badge--ai">AI Governance</span>
+            <span class="badge badge--community">Community &amp; Social</span>
+            <span class="maturity maturity--evergreen">🌲 Evergreen · v1.0 (August 2026)</span>
+          </div>
+        </div>
+
+        <h1 class="doc-title">
+          Agentic AI Social &amp; Customer Service<br>
+          <em>Resilience Playbook</em>
+        </h1>
+        
+        <p class="doc-subtitle">
+          Defending AI agents against inference abuse, context pollution, tool abuse, and human-escalation exhaustion. 
+          A practitioner's cross-platform framework for customer-service, community, and social AI deployments.
+        </p>
+
+        <div class="doc-meta-bar">
+          <div class="meta-item">
+            <span class="meta-label">Author</span>
+            <span class="meta-val">Adrian Lee (CAIGP)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Discipline</span>
+            <span class="meta-val">AI Governance + Community Ops</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Reading Time</span>
+            <span class="meta-val">25 min deep dive / Reference</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-val">Open Framework</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER WITH STICKY TOC -->
+    <div class="container">
+      <div class="doc-layout">
+        <!-- SIDEBAR TOC -->
+        <aside class="doc-sidebar">
+          <div class="sidebar-sticky">
+            <div class="sidebar-title">Playbook Navigation</div>
+            <nav class="toc-nav">
+              <ul>
+                {sections.map(s => (
+                  <li>
+                    <a href={`#${s.id}`} class="toc-link">
+                      <span class="toc-text">{s.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div class="sidebar-action">
+              <a href="/contact" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
+                Consult on Implementation →
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- MAIN ARTICLE BODY -->
+        <main class="doc-main prose">
+
+          <!-- SECTION 1 -->
+          <section id="exec-summary" class="playbook-section">
+            <div class="section-tag">Section 01</div>
+            <h2>1. Executive Summary &amp; The Core Principle</h2>
+            <p>
+              AI agents are moving far beyond traditional single-turn chatbots. In modern customer service, community management, 
+              and social platforms, agentic systems continuously observe messages, assess whether intervention is required, 
+              query knowledge bases, execute workflow APIs, enforce community moderation guidelines, and escalate edge cases to human reviewers.
+            </p>
+            <p>
+              While this delivers tremendous operational scale, it introduces a critical, emerging category of socio-technical vulnerability: 
+              <strong>Asymmetric Resource Exhaustion</strong>. In these attacks, an adversary's primary objective is not to break model weights, 
+              jailbreak safety filters, or exfiltrate private data — but rather to <em>force the target organization's AI infrastructure into performing expensive, wasteful work</em>.
+            </p>
+
+            <div class="callout callout--danger">
+              <div class="callout-title">The Foundational Resilience Principle</div>
+              <p>
+                <strong>An AI agent must never possess unlimited compute authority, unbounded tool access, unconstrained execution loops, or the unrestrained power to consume scarce human attention.</strong>
+              </p>
+            </div>
+
+            <p>
+              The protected assets of an organization are not just tokens or cloud bills. They comprise:
+            </p>
+            <div class="resource-grid">
+              <div class="resource-pill"><strong>Tokens &amp; GPUs</strong> — Compute budgets</div>
+              <div class="resource-pill"><strong>Backend APIs</strong> — Rate limits &amp; db queries</div>
+              <div class="resource-pill"><strong>Knowledge Stores</strong> — Vector retrieval precision</div>
+              <div class="resource-pill"><strong>Human Attention</strong> — Tier-3 specialist hours</div>
+              <div class="resource-pill"><strong>Community Trust</strong> — Brand credibility &amp; safety</div>
+            </div>
+          </section>
+
+          <!-- SECTION 2 -->
+          <section id="threat-model" class="playbook-section">
+            <div class="section-tag">Section 02</div>
+            <h2>2. The Expanded Threat Model &amp; Social Platform Exposure</h2>
+            <p>
+              Public-facing customer support channels and community ecosystems (Discord, Telegram, Reddit, X, WhatsApp, customer forums) 
+              differ fundamentally from authenticated SaaS portals. They suffer from structural exposures:
+            </p>
+            <ul>
+              <li><strong>Zero Cost of Adversarial Identity:</strong> Adversaries can spawn limitless throwaway identities (Sybil attacks) to bombard conversational interfaces.</li>
+              <li><strong>Unbounded Input Surface:</strong> Public users control length, syntax, formatting, encoded payloads, and conversational pacing.</li>
+              <li><strong>Asymmetric Economics:</strong> An attacker spending zero dollars can trigger recursive agent chains costing $0.15 to $1.20 per interaction.</li>
+              <li><strong>Public Audience Amplification:</strong> Any agent hallucination, erratic loop, or offensive output occurs in full view of current and prospective customers.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 3 -->
+          <section id="threat-taxonomy" class="playbook-section">
+            <div class="section-tag">Section 03</div>
+            <h2>3. The 10-Vector Threat Taxonomy</h2>
+            <p>
+              A robust AI governance program must evaluate agent architectures against these ten distinct attack vectors:
+            </p>
+
+            <div class="table-wrapper">
+              <table class="playbook-table">
+                <thead>
+                  <tr>
+                    <th>Attack Vector</th>
+                    <th>Target Resource</th>
+                    <th>Mechanism of Attack</th>
+                    <th>Primary Architectural Defense</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Inference Exhaustion</strong></td>
+                    <td>GPU Time &amp; Model Spend</td>
+                    <td>Prompt bombarding with giant contexts, recursive reasoning loops, and multi-model trigger traps.</td>
+                    <td>Tiered model routing (SLMs first), input token clamping, per-session budget hard-stops.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Engagement Manipulation</strong></td>
+                    <td>Agent Attention &amp; Availability</td>
+                    <td>Dragging agents into endless argumentative or circular debates to tie up concurrency limits.</td>
+                    <td>Deterministic Engagement Governor; exit rules after 3 non-productive turns.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Context-Window Pollution</strong></td>
+                    <td>Prompt Relevance &amp; Memory</td>
+                    <td>Flooding conversation buffers with garbage or contradictory assertions to displace system guardrails.</td>
+                    <td>Strict context isolation, token-weighted summarization, system prompt re-anchoring.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Retrieval Pollution (RAG Attack)</strong></td>
+                    <td>Vector Precision &amp; KB Integrity</td>
+                    <td>Crafting public forum questions designed to retrieve high-volume irrelevant embeddings.</td>
+                    <td>Similarity thresholds, query sanitization, separation of public user content from verified KB.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>5. Tool Amplification</strong></td>
+                    <td>Backend APIs &amp; Databases</td>
+                    <td>Prompting the agent into issuing hundreds of database lookups, webhook triggers, or refund checks.</td>
+                    <td>Deterministic tool policy layer, rate limits per tool, mandatory confirmation on state changes.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>6. Human Escalation Exhaustion</strong></td>
+                    <td>Human Reviewer Hours</td>
+                    <td>Synthesizing subtle edge cases and false distress triggers that deliberately force routing to live agents.</td>
+                    <td>Escalation clustering, anomaly thresholding, requiring authenticated verification before human queue.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>7. Coordinated Sybil Abuse</strong></td>
+                    <td>System-wide Throughput</td>
+                    <td>Distributing micro-queries across 500 bot accounts to bypass per-user rate limiters.</td>
+                    <td>Cross-account behavioral correlation, cluster fingerprinting, IP subnet dampening.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>8. Agent-to-Agent Feedback Loops</strong></td>
+                    <td>Compute &amp; Network Concurrency</td>
+                    <td>Placing two AI agents into conversational loop where each responds indefinitely to the other.</td>
+                    <td>Self-identification headers, bot-to-bot suppression filters, mandatory conversational termination flags.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>9. Community Trust Manipulation</strong></td>
+                    <td>Brand Reputation &amp; Safety</td>
+                    <td>Tricking the agent into endorsing misleading terms, incorrect pricing, or conflicting policies in public.</td>
+                    <td>Fact-checking validator pass, restricted claims register, unalterable disclaimers.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>10. Runaway Autonomous Behavior</strong></td>
+                    <td>Infrastructure Stability</td>
+                    <td>Unconstrained self-reflection loops where subagents launch secondary agents recursively.</td>
+                    <td>Hard recursion depth ceiling (Max depth = 2), global per-turn execution deadlines.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 4 -->
+          <section id="economics" class="playbook-section">
+            <div class="section-tag">Section 04</div>
+            <h2>4. The Economics of Agentic Abuse</h2>
+            <p>
+              In classical cybersecurity, Denial of Service (DoS) attacks consume network bandwidth. In agentic systems, DoS attacks 
+              consume <strong>marginal operational dollars</strong>. 
+            </p>
+            <p>
+              Consider a typical multi-agent customer service deployment using frontier models ($3.00/1M prompt tokens, $15.00/1M completion tokens):
+            </p>
+            <div class="card card--featured" style="margin-bottom: var(--space-6);">
+              <ul style="margin: 0; padding-left: var(--space-5);">
+                <li><strong>Baseline Legitimate Interaction:</strong> 350 tokens in, 180 tokens out, 1 tool lookup = <strong>~$0.003</strong></li>
+                <li><strong>Malicious Unconstrained Loop:</strong> 12,000 token context injection, recursive web retrieval, 8 subagent reflection cycles, human escalation = <strong>~$0.85 + $4.50 human cost</strong></li>
+              </ul>
+            </div>
+            <p>
+              An automated script executing 2,000 such interactions per hour imposes over $10,000 per day in compute and staffing costs. 
+              <strong>Without economic throttling, autonomy is an unhedged operational liability.</strong>
+            </p>
+          </section>
+
+          <!-- SECTION 5 -->
+          <section id="compute-governance" class="playbook-section">
+            <div class="section-tag">Section 05</div>
+            <h2>5. Compute Governance &amp; Tiered Model Routing</h2>
+            <p>
+              Never allow the raw public user prompt to hit your most capable (and expensive) reasoning engine directly. 
+              Implement a <strong>3-tier waterfall routing architecture</strong>:
+            </p>
+            <div class="steps-flow">
+              <div class="step-box">
+                <span class="step-num">Tier 0</span>
+                <h4>Deterministic Regex &amp; Rules</h4>
+                <p>Spam blockers, IP rate limiters, blocklisted tokens. Cost: $0.0000</p>
+              </div>
+              <div class="step-box">
+                <span class="step-num">Tier 1</span>
+                <h4>Small Language Model (SLM)</h4>
+                <p>Intent classification, prompt sanitization, sentiment scoring, canned response retrieval. Cost: $0.0001</p>
+              </div>
+              <div class="step-box">
+                <span class="step-num">Tier 2</span>
+                <h4>Specialized Reasoning Model</h4>
+                <p>Invoked only when customer identity is validated, intent requires multi-step synthesis, and tool execution is necessary. Bounded to 800 output tokens.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 6 -->
+          <section id="engagement-governor" class="playbook-section">
+            <div class="section-tag">Section 06</div>
+            <h2>6. The Conversation Engagement Governor</h2>
+            <p>
+              Human customer support agents intuitively know when a conversation has ceased to be constructive. 
+              Autonomous AI agents do not — unless explicitly governed by state machine constraints.
+            </p>
+            <h3>Mandatory Governor State Machine Rules</h3>
+            <ol>
+              <li><strong>Max Turn Horizon:</strong> Hard ceiling of 4 autonomous turns per issue. If unresolved, transition to asynchronous ticket creation.</li>
+              <li><strong>Circular Logic Breaker:</strong> Calculate cosine similarity across the user's last 3 prompts. If similarity exceeds 0.85 with no new entity parameters, trigger polite closure.</li>
+              <li><strong>Sentiment Decay Gate:</strong> If sentiment trajectory drops across consecutive turns, suppress autonomous debate and present standardized resolution options.</li>
+            </ol>
+          </section>
+
+          <!-- SECTION 7 -->
+          <section id="context-protection" class="playbook-section">
+            <div class="section-tag">Section 07</div>
+            <h2>7. Context &amp; Knowledge Protection</h2>
+            <p>
+              Context windows are vulnerability surfaces. Knowledge retrieval pipelines must enforce strict provenance boundaries:
+            </p>
+            <ul>
+              <li><strong>Never mix user-generated forum content into trusted RAG stores:</strong> Public discussions must live in a separate, lower-trust index that can never override canonical product documentation.</li>
+              <li><strong>Sliding-Window Memory Summarization:</strong> Never append raw conversation history indefinitely. Compress turns into deterministic JSON state objects.</li>
+              <li><strong>System Prompt Re-anchoring:</strong> In long dialogues, inject the immutable system policy instructions immediately prior to the final generation call rather than only at the top of the buffer.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 8 -->
+          <section id="tool-governance" class="playbook-section">
+            <div class="section-tag">Section 08</div>
+            <h2>8. Tool and Action Governance</h2>
+            <blockquote>
+              "Separate the reasoning model from the execution authority."
+            </blockquote>
+            <p>
+              A large language model should only produce a <em>structured intent to act</em>. An independent, deterministic authorization middleware must intercept and evaluate every tool call:
+            </p>
+            <div class="table-wrapper">
+              <table class="playbook-table">
+                <thead>
+                  <tr>
+                    <th>Action Category</th>
+                    <th>Examples</th>
+                    <th>Autonomous Authority Level</th>
+                    <th>Required Verification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Read-Only Informational</strong></td>
+                    <td>FAQ lookup, public status, order status check</td>
+                    <td>Full Autonomy</td>
+                    <td>Session rate limit</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Low-Risk Mutative</strong></td>
+                    <td>Update notification preferences, change delivery date</td>
+                    <td>Scoped Autonomy</td>
+                    <td>Magic link / 2FA session token</td>
+                  </tr>
+                  <tr>
+                    <td><strong>High-Impact Financial / Account</strong></td>
+                    <td>Issue refund, reset password, change payout address</td>
+                    <td>Zero Autonomous Authority</td>
+                    <td>Mandatory Human-in-the-Loop review</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 9 -->
+          <section id="human-escalation" class="playbook-section">
+            <div class="section-tag">Section 09</div>
+            <h2>9. Protecting the Human Escalation Layer</h2>
+            <p>
+              Human attention is the ultimate bottleneck in customer service and moderation. Adversaries exploit automated escalation 
+              by manufacturing synthetic urgency to overwhelm Tier-3 specialized staff.
+            </p>
+            <h3>Defensive Escalation Filters</h3>
+            <ul>
+              <li><strong>Cluster Escalations Before Routing:</strong> If 40 requests with near-identical semantic embeddings arrive within 5 minutes, group them into a single incident review ticket rather than generating 40 separate live tasks.</li>
+              <li><strong>Require Micro-Friction:</strong> Before placing an unverified user in a priority human queue, require an email confirmation or a simple CAPTCHA. Legitimate users comply; automated scripts stall.</li>
+              <li><strong>Structured AI Handoff Summaries:</strong> When escalation occurs, the agent must generate a concise, 3-line briefing (User Intent, Actions Attempted, Reason for Escalation) so the human agent saves 80% of diagnostic time.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 10 -->
+          <section id="coordinated-abuse" class="playbook-section">
+            <div class="section-tag">Section 10</div>
+            <h2>10. Cross-Account &amp; Coordinated Abuse Detection</h2>
+            <p>
+              Modern threat actors do not use single accounts; they deploy distributed bot swarms across Discord, Telegram, and web chat. 
+              Evaluating rate limits on a per-account basis is completely ineffective.
+            </p>
+            <p>
+              Implement <strong>Cross-Account Behavioral Correlation</strong>:
+            </p>
+            <ul>
+              <li><strong>Semantic Clustering Across Sessions:</strong> Group incoming queries across all users in real-time. A spike in identical phrasing from distinct IPs indicates a scripted campaign.</li>
+              <li><strong>Temporal Frequency Analysis:</strong> Detect synchronized inquiry intervals characteristic of bot orchestrators.</li>
+              <li><strong>Global System Dampening:</strong> Under coordinated pressure, automatically toggle agents into "Conservation Mode" (reduced context length, deterministic FAQ responses only).</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 11 -->
+          <section id="defensive-architecture" class="playbook-section">
+            <div class="section-tag">Section 11</div>
+            <h2>11. Reference Defensive Architecture</h2>
+            <div class="card card--featured architecture-block">
+              <pre><code>
++-------------------------------------------------------------------------+
+|                        INCOMING USER INTERACTION                        |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| GATEWAY 0: Deterministic Guardrails (IP, Rate Limit, Regex Blocklist)   |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| GATEWAY 1: Engagement Governor (Turn Count, Sentiment, Cosine Similarity)|
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| GATEWAY 2: Tiered Model Routing (SLM Classifier -> Domain-Specific LLM) |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+| GATEWAY 3: Independent Tool Policy Middleware (Deterministic Auth & RBAC)|
++-------------------------------------------------------------------------+
+            |                                               |
+            | (State mutation / escalation)                | (Read query)
+            v                                               v
++---------------------------------------+       +-------------------------+
+| HUMAN TIER-3 REVIEW QUEUE             |       | VERIFIED RESPONSE TO    |
+| (Clustered & Anomaly Filtered)        |       | CUSTOMER / COMMUNITY    |
++---------------------------------------+       +-------------------------+
+              </code></pre>
+            </div>
+          </section>
+
+          <!-- SECTION 12 -->
+          <section id="incident-response" class="playbook-section">
+            <div class="section-tag">Section 12</div>
+            <h2>12. Incident Response SOP &amp; Minimum Monitoring Dashboard</h2>
+            <p>
+              Every production agent deployment must maintain a live operational dashboard tracking these core metrics:
+            </p>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <span class="metric-num">$/Res</span>
+                <span class="metric-label">Token Cost per Resolved Case</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num">Turn:Res</span>
+                <span class="metric-label">Average Conversational Turns to Close</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num">% Esc</span>
+                <span class="metric-label">Human Escalation Ratio (Target: &lt;12%)</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num">Tool:Call</span>
+                <span class="metric-label">Backend Tool Invocations per Turn</span>
+              </div>
+            </div>
+
+            <h3>Four-Level Threat Alert SOP</h3>
+            <ul>
+              <li><strong>Level 1 (Elevated Token Velocity):</strong> Re-route 40% of non-critical traffic to cached SLM templates.</li>
+              <li><strong>Level 2 (Coordinated Cluster Detected):</strong> Enable mandatory session CAPTCHA for unauthenticated users.</li>
+              <li><strong>Level 3 (Tool Invocation Anomaly):</strong> Disable mutative tool execution; force read-only advisory mode.</li>
+              <li><strong>Level 4 (Active Compromise / Escalation Flood):</strong> Emergency circuit breaker: switch all agents to static status messaging and alert security lead.</li>
+            </ul>
+          </section>
+
+          <!-- SECTION 13 -->
+          <section id="maturity-model" class="playbook-section">
+            <div class="section-tag">Section 13</div>
+            <h2>13. The 5-Stage Agentic Resilience Maturity Model</h2>
+            <div class="table-wrapper">
+              <table class="playbook-table">
+                <thead>
+                  <tr>
+                    <th>Level</th>
+                    <th>State</th>
+                    <th>Characteristics</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Level 1</strong></td>
+                    <td><strong>Reactive</strong></td>
+                    <td>Single frontier model used for everything; unconstrained turns; no tool execution middleware; manual bill shock discovery.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Level 2</strong></td>
+                    <td><strong>Controlled</strong></td>
+                    <td>Basic IP rate limits; turn ceilings (max 5); hard budget quotas on API keys.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Level 3</strong></td>
+                    <td><strong>Measured</strong></td>
+                    <td>Cost per resolution tracked; SLM routing implemented; deterministic tool authorization policy.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Level 4</strong></td>
+                    <td><strong>Resilient</strong></td>
+                    <td>Cross-account behavioral correlation; dynamic circuit breakers; clustered human escalation protection.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Level 5</strong></td>
+                    <td><strong>Adaptive</strong></td>
+                    <td>Automated red-teaming simulations; self-healing prompt guardrails; participatory community co-regulation.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECTION 14 -->
+          <section id="design-principles" class="playbook-section">
+            <div class="section-tag">Section 14</div>
+            <h2>14. The 20 Resilience Design Principles</h2>
+            <div class="principles-list">
+              <div class="principle-item"><strong>1. High-volume, low-risk by default:</strong> Delegate routine work to AI; reserve complex, high-risk work for humans.</div>
+              <div class="principle-item"><strong>2. Bounded compute authority:</strong> Cap maximum tokens, execution duration, and subagent depth per interaction.</div>
+              <div class="principle-item"><strong>3. Bounded tool authority:</strong> No agent should hold unrestricted write or execute permissions across databases.</div>
+              <div class="principle-item"><strong>4. Mandatory engagement governor:</strong> Every public conversational agent must possess an explicit exit state.</div>
+              <div class="principle-item"><strong>5. Compute spikes trigger controls, not humans:</strong> Anomalous queries should fail closed, not flood human queues.</div>
+              <div class="principle-item"><strong>6. Human review is a finite resource:</strong> Treat reviewer time as a scarce, consumable operational asset.</div>
+              <div class="principle-item"><strong>7. Segregate knowledge provenance:</strong> Unverified community text must never contaminate canonical RAG indexes.</div>
+              <div class="principle-item"><strong>8. Least-cost model principle:</strong> Always deploy the smallest, fastest model capable of safely executing the step.</div>
+              <div class="principle-item"><strong>9. Decouple reasoning from authorization:</strong> An LLM suggests actions; deterministic code authorizes them.</div>
+              <div class="principle-item"><strong>10. Risk-stratified rate limits:</strong> Unauthenticated users receive stricter compute ceilings than verified customers.</div>
+              <div class="principle-item"><strong>11. Cross-account behavioral correlation:</strong> Attackers rotate accounts; defense must correlate cross-session semantics.</div>
+              <div class="principle-item"><strong>12. Self-hosted capacity is finite:</strong> On-premise GPUs choke under queue depth just as cloud budgets blow out.</div>
+              <div class="principle-item"><strong>13. Measure cost per resolution:</strong> Never optimize for total token count; optimize for cost per satisfied outcome.</div>
+              <div class="principle-item"><strong>14. Measure human minutes per ticket:</strong> Track human labor consumed by AI handoffs.</div>
+              <div class="principle-item"><strong>15. Design for recursion loops:</strong> Enforce hard break conditions on multi-agent collaboration.</div>
+              <div class="principle-item"><strong>16. Deterministic fail-down paths:</strong> When models error, default gracefully to verified static FAQs.</div>
+              <div class="principle-item"><strong>17. Protect state mutations:</strong> Any action altering balances, credentials, or privacy requires multi-factor confirmation.</div>
+              <div class="principle-item"><strong>18. Immutable audit telemetry:</strong> Log prompt hashes, routing decisions, tool parameters, and escalation rationales.</div>
+              <div class="principle-item"><strong>19. Continuous participatory red-teaming:</strong> Probe agent defenses using diverse community cohorts before adversary discovery.</div>
+              <div class="principle-item"><strong>20. Optimize for resilience over maximum autonomy:</strong> A slightly constrained agent that never fails catastrophic is infinitely more valuable than an unconstrained agent that breaks production.</div>
+            </div>
+          </section>
+
+          <!-- CONCLUSION CTA -->
+          <footer class="doc-footer card card--featured">
+            <h3>Implement This Framework With Adrian Lee</h3>
+            <p>
+              Need to conduct an AI Agent Threat Audit, design a Conversation Engagement Governor, or structure 
+              participatory red-teaming for your platform?
+            </p>
+            <div class="doc-footer__actions">
+              <a href="/contact" class="btn btn-primary">Schedule Advisory Consultation →</a>
+              <a href="/services#service-ai" class="btn btn-outline">Explore AI Governance Services</a>
+            </div>
+          </footer>
+
+        </main>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+.playbook-hero {
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: var(--space-10);
+  margin-bottom: var(--space-12);
+}
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.back-link {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.back-link:hover { color: var(--terracotta); }
+.hero-badges { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.doc-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+.doc-title em { color: var(--terracotta); }
+.doc-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--text-muted);
+  max-width: 820px;
+  line-height: 1.6;
+  margin-bottom: var(--space-8);
+}
+.doc-meta-bar {
+  display: flex;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-6);
+}
+.meta-item { display: flex; flex-direction: column; }
+.meta-label { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; }
+.meta-val { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+/* LAYOUT WITH TOC */
+.doc-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+.doc-sidebar { position: relative; }
+.sidebar-sticky {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--space-6));
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  max-height: calc(100vh - var(--nav-h) - var(--space-12));
+  overflow-y: auto;
+}
+.sidebar-title {
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-soft);
+}
+.toc-nav ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.toc-link {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+  padding: 0.25rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+.toc-link:hover {
+  color: var(--terracotta);
+  background: var(--bg-elevated);
+}
+.sidebar-action { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border-soft); }
+
+.playbook-section {
+  padding-bottom: var(--space-12);
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--border-soft);
+}
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--terracotta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.playbook-section h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  margin-bottom: var(--space-6);
+}
+
+.callout {
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  margin-block: var(--space-6);
+}
+.callout--danger {
+  background: rgba(194, 94, 62, 0.08);
+  border-left: 4px solid var(--terracotta);
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--terracotta);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+
+.resource-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.resource-pill {
+  padding: 0.4rem 0.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+.resource-pill strong { color: var(--terracotta); }
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-block: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.playbook-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.playbook-table th, .playbook-table td {
+  padding: var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+.playbook-table th {
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.playbook-table tbody tr:hover { background: var(--bg-surface); }
+
+.steps-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-block: var(--space-6);
+}
+.step-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ochre);
+  text-transform: uppercase;
+}
+.step-box h4 { margin-block: var(--space-2); font-size: 1rem; }
+.step-box p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+.architecture-block pre {
+  margin: 0;
+  padding: var(--space-5);
+  background: var(--bg-base);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sage-light);
+  line-height: 1.35;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-block: var(--space-6);
+}
+.metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: center;
+}
+.metric-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-bottom: var(--space-2);
+}
+.metric-label { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; display: block; }
+
+.principles-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-block: var(--space-6);
+}
+.principle-item {
+  padding: var(--space-4) var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ochre);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+}
+.principle-item strong { color: var(--text); }
+
+.doc-footer {
+  padding: var(--space-10);
+  margin-top: var(--space-12);
+  text-align: center;
+}
+.doc-footer h3 { margin-bottom: var(--space-3); }
+.doc-footer p { max-width: 540px; margin-inline: auto; margin-bottom: var(--space-6); color: var(--text-muted); }
+.doc-footer__actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 992px) {
+  .doc-layout { grid-template-columns: 1fr; }
+  .doc-sidebar { display: none; }
+  .steps-flow { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
