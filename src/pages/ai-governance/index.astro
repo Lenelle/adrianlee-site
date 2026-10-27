@@ -15,7 +15,7 @@ const aiEntries = [
   {
     slug: 'participatory-red-teaming',
     title: 'Participatory Red-Teaming: Community as a Safety Mechanism',
-    description: 'How involving community members in adversarial AI testing produces safer, more representative outcomes than internal teams alone.',
+    description: 'How involving community members in adversarial AI testing produces safer, more representative outcomes than internal evaluation alone.',
     category: 'Red-Teaming',
     tags: ['Red-Teaming', 'Participation', 'Safety'],
     maturity: 'budding',
@@ -25,7 +25,7 @@ const aiEntries = [
   {
     slug: 'caigp-certification',
     title: 'What the CAIGP Certification Actually Covers',
-    description: 'A practitioner\'s honest breakdown of the Certified AI Governance Professional curriculum — what it teaches, what it misses, and how it applies in the real world.',
+    description: 'A practitioner\'s honest breakdown of the Certified AI Governance Professional curriculum: what it teaches, what it misses, and how it applies in production.',
     category: 'Certification',
     tags: ['CAIGP', 'Certification', 'Fundamentals'],
     maturity: 'evergreen',
@@ -34,10 +34,10 @@ const aiEntries = [
   },
   {
     slug: 'ai-governance-community-overlap',
-    title: 'Where Community Design and AI Governance Overlap',
-    description: 'The structural similarities between governing online communities and governing AI systems — and what each field can learn from the other.',
+    title: 'Where Community Operations and AI Governance Overlap',
+    description: 'The structural similarities between managing online communities and governing AI systems, and what each field can learn from the other.',
     category: 'Frameworks',
-    tags: ['Community', 'Frameworks', 'Cross-disciplinary'],
+    tags: ['Community', 'Frameworks', 'Operations'],
     maturity: 'budding',
     readTime: '11 min',
     lastRevised: '2025-05',
@@ -45,7 +45,7 @@ const aiEntries = [
   {
     slug: 'human-in-the-loop',
     title: 'Human-in-the-Loop: What It Means in Practice',
-    description: 'Beyond the buzzword — what genuine human oversight of AI systems actually requires, and where most implementations fall short.',
+    description: 'Beyond the buzzword: what genuine human oversight of AI systems actually requires, and where most implementations fall short.',
     category: 'Policy',
     tags: ['HITL', 'Oversight', 'Policy'],
     maturity: 'seedling',
@@ -63,7 +63,7 @@ const maturityMap = {
 
 <BaseLayout
   title="AI Governance"
-  description="Frameworks, research notes, and practitioner thinking on AI governance, ethics, and participatory AI safety. By a Certified AI Governance Professional."
+  description="Operational frameworks, research notes, and practitioner thinking on AI governance, safety, and participatory evaluation. By a Certified AI Governance Professional."
 >
 
   <div class="ai-page" style="padding-top: var(--nav-h);">
@@ -71,12 +71,12 @@ const maturityMap = {
       <div class="container">
         <div class="section-label"><span class="label">AI Governance</span></div>
         <h1 class="page-header__title">
-          Making AI<br>
-          <em>trustworthy at scale.</em>
+          Making AI systems<br>
+          <em>reliable in production.</em>
         </h1>
         <p class="page-header__desc">
-          Practitioner perspectives on AI governance, ethics, and participatory safety. 
-          Written from the intersection of community design and governance frameworks — 
+          Practitioner perspectives on AI governance, safety, and participatory testing. 
+          Written from the intersection of community operations and governance frameworks, 
           by a Certified AI Governance Professional.
         </p>
       </div>
@@ -86,9 +86,9 @@ const maturityMap = {
     <section class="ai-bridge section--sm" aria-labelledby="bridge-heading">
       <div class="container container--narrow">
         <blockquote class="ai-bridge__quote" id="bridge-heading">
-          "The communities that built social platforms needed governance systems to stay trustworthy. 
-          AI is no different — and it needs the same participatory design principles we learned to apply 
-          to communities."
+          "The communities that formed around social platforms needed governance rules to stay trustworthy. 
+          AI agents are no different: they need the same participatory design principles we learned the hard way 
+          managing communities."
         </blockquote>
       </div>
     </section>
@@ -102,7 +102,7 @@ const maturityMap = {
           {aiEntries.map((entry) => {
             const maturity = maturityMap[entry.maturity as keyof typeof maturityMap];
             return (
-              <a href={`/ai-governance/${entry.slug}`} class="ai-entry__card card card--clickable card--ai" id={`ai-${entry.slug}`}>
+              <a href={entry.slug.startsWith('../') ? entry.slug.replace('../', '/') : `/ai-governance/${entry.slug}`} class="ai-entry__card card card--clickable card--ai" id={`ai-${entry.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
                 <div class="ai-entry__meta">
                   <span class="badge badge--ai">{entry.category}</span>
                   <span class={`maturity ${maturity.className}`}>{maturity.label}</span>
@@ -130,8 +130,8 @@ const maturityMap = {
       <div class="container container--narrow">
         <div class="card card--featured ai-cta__card">
           <span class="badge badge--ai" style="margin-bottom: var(--space-4); display: inline-flex;">AI Governance Advisory</span>
-          <h2 id="ai-cta-heading">Need AI governance expertise for your organization?</h2>
-          <p>I advise think tanks, policy organizations, and technology companies on AI governance frameworks, participatory safety programs, and ethics implementation.</p>
+          <h2 id="ai-cta-heading">Need AI governance guidance for your team?</h2>
+          <p>I advise think tanks, policy organizations, and technology companies on practical AI governance controls, participatory red-teaming, and operational safety programs.</p>
           <div class="ai-cta__buttons">
             <a href="/services#service-ai" class="btn btn-primary" id="ai-services-cta">View advisory services →</a>
             <a href="/contact" class="btn btn-outline" id="ai-contact-cta">Get in touch</a>

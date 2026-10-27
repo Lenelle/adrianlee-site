@@ -4,7 +4,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <ArticleLayout
   title="Moderation at Scale: What Global Platforms Get Wrong"
-  description="Lessons from moderating communities of millions — and the human systems required to make it humane, sustainable, and scalable."
+  description="Lessons from moderating communities of millions, and the operational systems needed to protect both the community and the moderation team."
   date="2025-06"
   maturity="budding"
   readTime="12 min"
@@ -12,46 +12,46 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   tags={['Moderation', 'Platform Safety', 'Scale']}
 >
   <p>
-    When online communities scale from thousands to millions, traditional moderation breaks down in predictable ways. 
-    Platforms attempt to solve this through two extremes: either throwing automated regex filters at everything or 
-    burning out low-wage human moderators with impossible queue volumes.
+    When online communities scale from thousands to millions, traditional moderation breaks down predictably. 
+    Platforms tend to react in two unhelpful ways: either relying entirely on blunt automated keyword filters, 
+    or burning out human moderators with impossible queues of flagged content.
   </p>
 
-  <h2>The Failure of Binary Moderation</h2>
+  <h2>The Limits of Binary Moderation</h2>
   <p>
-    Most moderation architectures operate on a crude binary: <em>Permitted vs. Banned</em>. This ignores the reality 
-    of human communication, where 80% of problematic interactions stem from context mismatch, cultural nuance, 
-    or escalating emotional frustration rather than malicious actors.
+    Most moderation setups rely on a blunt binary: permitted versus banned. This misses how people actually communicate. 
+    The majority of problematic interactions come from miscommunication, cultural misunderstandings, 
+    or escalating arguments, rather than dedicated bad actors.
   </p>
 
-  <h2>The 3-Tier Moderation Architecture</h2>
+  <h2>The 3-Tier Moderation Setup</h2>
   <p>
-    To protect platform health without destroying user trust, we implement a three-tier system:
+    To protect platform safety without alienating users, we use a three-tier operational structure:
   </p>
 
-  <h3>Tier 1: Algorithmic Triage & Context Filtering</h3>
+  <h3>Tier 1: Algorithmic Triage and Pattern Filtering</h3>
   <p>
-    Automated tooling should never be the judge and jury for nuanced discourse. Its job is solely triage:
-    filtering spam vectors, malicious payloads, and known illegal content, while elevating ambiguous edge cases 
-    to humans with rich context.
+    Automated tools should not make final calls on nuanced discussions. Their job is triage: 
+    filtering obvious spam runs, harmful links, and explicit violations, while passing ambiguous edge cases 
+    to human reviewers with full context attached.
   </p>
 
-  <h3>Tier 2: Community-Led Co-Regulation</h3>
+  <h3>Tier 2: Community-Led Moderation</h3>
   <p>
-    Empowering peer moderators and community champions with lightweight interventions: slow modes, cooling-off 
-    periods, and dispute mediation. When community norms are enforced by peers rather than faceless corporate administrators, 
-    compliance is significantly higher.
+    Empowering trusted community members and volunteer leads with lightweight tools: slow modes, cooling-off 
+    periods, and basic dispute handling. When community guidelines are upheld by active peers rather than distant corporate administrators, 
+    users are far more receptive.
   </p>
 
-  <h3>Tier 3: Specialist Trust & Safety Escalation</h3>
+  <h3>Tier 3: Specialist Safety Operations</h3>
   <p>
-    A dedicated professional team trained in conflict resolution, legal compliance, and crisis containment. 
-    This group handles severe violations, coordinated bad-faith attacks, and policy edge cases.
+    A dedicated professional team trained in conflict resolution, legal compliance, and emergency response. 
+    This team handles severe violations, coordinated harassment, and complex policy decisions.
   </p>
 
-  <h2>Preserving Moderator Wellbeing</h2>
+  <h2>Protecting Moderator Health</h2>
   <p>
-    Sustainable platform safety is impossible without moderator care protocols. Shift caps, psychological debriefs, 
-    and rotational duty cycles are not perks — they are critical infrastructure components.
+    Sustainable safety operations require genuine support for the people reviewing content. Shift limits, 
+    regular debriefs, and rotation between queue work and non-incident tasks are basic operational necessities.
   </p>
 </ArticleLayout>

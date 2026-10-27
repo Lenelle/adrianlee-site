@@ -1,153 +1,354 @@
 ---
 import '../styles/global.css';
 
-export interface Props {
+interface Props {
   title: string;
   description?: string;
-  ogImage?: string;
-  canonicalURL?: string;
+  image?: string;
 }
 
 const {
   title,
-  description = 'Adrian Lee — Community Ecosystem Strategist, AI Governance Professional, and Platform Safety expert. Building communities that matter and the governance systems to sustain them.',
-  ogImage = '/og-default.jpg',
-  canonicalURL = Astro.url.href,
+  description = 'Adrian Lee | Community Ecosystem Strategist, AI Governance Professional, and Platform Safety expert. Building communities that matter and the governance systems to sustain them.',
+  image = '/images/adrian-lee.jpg',
 } = Astro.props;
 
-const fullTitle = title === 'Adrian Lee' ? title : `${title} — Adrian Lee`;
-const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://adrianlee.netlify.app');
+const fullTitle = title === 'Adrian Lee' ? title : `${title} | Adrian Lee`;
 ---
 
 <!doctype html>
-<html lang="en" class="noise">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="generator" content={Astro.generator} />
-  <meta name="robots" content="index, follow" />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalURL} />
 
-  <!-- Primary SEO -->
-  <title>{fullTitle}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={canonicalURL} />
+    <!-- SEO -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Adrian Lee" />
+    <meta name="generator" content={Astro.generator} />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={canonicalURL} />
-  <meta property="og:title" content={fullTitle} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL(ogImage, Astro.site)} />
-  <meta property="og:site_name" content="Adrian Lee" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={fullTitle} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Fonts: Newsreader (editorial serif), Plus Jakarta Sans (body), JetBrains Mono (labels/code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Site Header / Navigation -->
+    <header class="site-header" id="site-header">
+      <div class="container site-header__inner">
+        <a href="/" class="site-logo" aria-label="Adrian Lee - Home">
+          <span class="site-logo__name">Adrian Lee</span>
+          <span class="site-logo__badge" aria-label="Certified AI Governance Professional">CAIGP</span>
+        </a>
 
-  <!-- Fonts preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="nav" aria-label="Main navigation">
-    <div class="container nav__inner">
-      <a href="/" class="nav__logo" aria-label="Adrian Lee - Home">Adrian Lee</a>
+        <!-- Desktop Navigation -->
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/about" class="nav-link">About</a>
+          <a href="/services" class="nav-link">Services</a>
+          <a href="/playbook" class="nav-link">Playbook</a>
+          <a href="/ai-governance" class="nav-link">AI Governance</a>
+          <a href="/portfolio" class="nav-link">Portfolio</a>
+          <a href="/speaking" class="nav-link">Speaking</a>
+          <a href="/contact" class="btn btn-primary btn-sm" id="nav-cta">Get in Touch</a>
+        </nav>
 
-      <ul class="nav__links" role="list">
-        <li><a href="/about" class={currentPath === '/about' ? 'active' : ''}>About</a></li>
-        <li><a href="/services" class={currentPath === '/services' ? 'active' : ''}>Services</a></li>
-        <li><a href="/playbook" class={currentPath.startsWith('/playbook') ? 'active' : ''}>Playbook</a></li>
-        <li><a href="/ai-governance" class={currentPath.startsWith('/ai-governance') ? 'active' : ''}>AI Governance</a></li>
-        <li><a href="/portfolio" class={currentPath === '/portfolio' ? 'active' : ''}>Portfolio</a></li>
-        <li><a href="/speaking" class={currentPath === '/speaking' ? 'active' : ''}>Speaking</a></li>
-        <li><a href="/contact" class="nav__cta">Work With Me</a></li>
-      </ul>
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu"
+        >
+          <span class="menu-toggle__bar"></span>
+          <span class="menu-toggle__bar"></span>
+        </button>
+      </div>
 
-      <button
-        class="nav__hamburger"
-        id="menu-toggle"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Toggle navigation menu"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="3" y1="6" x2="21" y2="6" id="menu-line-1"/>
-          <line x1="3" y1="12" x2="21" y2="12" id="menu-line-2"/>
-          <line x1="3" y1="18" x2="21" y2="18" id="menu-line-3"/>
-        </svg>
-      </button>
-    </div>
-  </nav>
+      <!-- Mobile Navigation Drawer -->
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu__inner container">
+          <nav class="mobile-nav" aria-label="Mobile navigation">
+            <a href="/about" class="mobile-nav-link">About</a>
+            <a href="/services" class="mobile-nav-link">Services</a>
+            <a href="/playbook" class="mobile-nav-link">Playbook</a>
+            <a href="/ai-governance" class="mobile-nav-link">AI Governance</a>
+            <a href="/portfolio" class="mobile-nav-link">Portfolio</a>
+            <a href="/speaking" class="mobile-nav-link">Speaking</a>
+            <a href="/contact" class="btn btn-primary" id="mobile-nav-cta">Get in Touch</a>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-  <!-- Mobile menu -->
-  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
-    <a href="/about">About</a>
-    <a href="/services">Services</a>
-    <a href="/playbook">Playbook</a>
-    <a href="/ai-governance">AI Governance</a>
-    <a href="/portfolio">Portfolio</a>
-    <a href="/speaking">Speaking</a>
-    <a href="/contact" style="color: var(--terracotta); font-weight: 600;">Work With Me →</a>
-  </div>
+    <!-- Main Content -->
+    <main id="main-content">
+      <slot />
+    </main>
 
-  <!-- Main content -->
-  <main>
-    <slot />
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div>
-          <div class="footer__brand">Adrian Lee</div>
-          <p class="footer__tagline">
-            Community ecosystems, platform safety, and AI governance — 
-            <em>building the human systems that make technology trustworthy.</em>
+    <!-- Site Footer -->
+    <footer class="site-footer" id="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <div class="site-logo">
+            <span class="site-logo__name">Adrian Lee</span>
+            <span class="site-logo__badge">CAIGP</span>
+          </div>
+          <p class="site-footer__tagline">
+            Community ecosystems, platform safety, and AI governance.
+            Building systems that hold up under real-world pressure.
+          </p>
+          <p class="site-footer__creds">
+            SPF &middot; IAHGames &middot; Google &middot; Wargaming &middot; Binance &middot; OKX
           </p>
         </div>
-        <nav aria-label="Footer navigation">
-          <ul class="footer__links" role="list">
-            <li><a href="/about">About</a></li>
-            <li><a href="/playbook">Playbook</a></li>
-            <li><a href="/ai-governance">AI Governance</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
+
+        <div class="site-footer__links">
+          <div class="footer-col">
+            <span class="footer-col__title">Work</span>
+            <a href="/services">Services</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/speaking">Speaking</a>
+            <a href="/contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col__title">Thinking</span>
+            <a href="/playbook">Community Playbook</a>
+            <a href="/ai-governance">AI Governance</a>
+            <a href="/about">About &amp; Principles</a>
+          </div>
+          <div class="footer-col">
+            <span class="footer-col__title">Connect</span>
+            <a href="https://linkedin.com/in/adrianlee" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://github.com/adrianlee" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+        </div>
       </div>
-      <div class="footer__copy">
-        <span>&copy; {new Date().getFullYear()} Adrian Lee. All rights reserved.</span>
-        <span>
-          <a href="https://linkedin.com/in/adrianlee" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </span>
+
+      <div class="container site-footer__bottom">
+        <p>&copy; {new Date().getFullYear()} Adrian Lee. All rights reserved.</p>
+        <p class="site-footer__credit">Built with Astro. Designed with care.</p>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script>
-    // Mobile menu toggle
-    const toggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+    <!-- Mobile menu toggle script -->
+    <script is:inline>
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
 
-    toggle?.addEventListener('click', () => {
-      const isOpen = mobileMenu?.classList.contains('open');
-      mobileMenu?.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-    });
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+          const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!isOpen));
+          menu.setAttribute('aria-hidden', String(isOpen));
+          menu.classList.toggle('is-open', !isOpen);
+          document.body.classList.toggle('menu-open', !isOpen);
+        });
 
-    // Close mobile menu on link click
-    mobileMenu?.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      });
-    });
-  </script>
-</body>
+        // Close menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.setAttribute('aria-hidden', 'true');
+            menu.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
+
+<style>
+/* Header Styles */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(23, 21, 19, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+  z-index: var(--z-nav);
+  transition: border-color var(--transition-fast);
+}
+.site-header__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+}
+.site-logo__name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.site-logo__badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--ochre-glow);
+  color: var(--ochre);
+  border: 1px solid rgba(212, 151, 59, 0.3);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+.nav-link {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color var(--transition-fast);
+}
+.nav-link:hover { color: var(--text); }
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  cursor: pointer;
+}
+.menu-toggle__bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--text);
+  transition: all var(--transition-normal);
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-6) 0 var(--space-8);
+  z-index: var(--z-nav);
+}
+.mobile-menu.is-open { display: block; }
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.mobile-nav-link {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding-block: var(--space-1);
+}
+.mobile-nav-link:hover { color: var(--text); }
+
+@media (max-width: 820px) {
+  .site-nav { display: none; }
+  .menu-toggle { display: flex; }
+}
+
+/* Footer Styles */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-8);
+  margin-top: var(--space-20);
+}
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+.site-footer__brand { max-width: 380px; }
+.site-footer__tagline {
+  margin-top: var(--space-4);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.site-footer__creds {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+.site-footer__links {
+  display: flex;
+  gap: var(--space-12);
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.footer-col__title {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: var(--space-1);
+}
+.footer-col a {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.footer-col a:hover { color: var(--terracotta); }
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+}
+@media (max-width: 768px) {
+  .site-footer__inner { grid-template-columns: 1fr; }
+  .site-footer__links { flex-direction: column; gap: var(--space-6); }
+  .site-footer__bottom { flex-direction: column; gap: var(--space-3); align-items: flex-start; }
+}
+</style>
