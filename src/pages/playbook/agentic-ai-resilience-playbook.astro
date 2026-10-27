@@ -392,39 +392,67 @@ const sections = [
           <section id="defensive-architecture" class="playbook-section">
             <div class="section-tag">Section 11</div>
             <h2>11. Reference Defensive Architecture</h2>
-            <div class="card card--featured architecture-block">
-              <pre><code>
-+-------------------------------------------------------------------------+
-|                        INCOMING USER INTERACTION                        |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATEWAY 0: Deterministic Guardrails (IP, Rate Limit, Regex Blocklist)   |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATEWAY 1: Engagement Governor (Turn Count, Sentiment, Cosine Similarity)|
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATEWAY 2: Tiered Model Routing (SLM Classifier -> Domain-Specific LLM) |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATEWAY 3: Independent Tool Policy Middleware (Deterministic Auth & RBAC)|
-+-------------------------------------------------------------------------+
-            |                                               |
-            | (State mutation / escalation)                | (Read query)
-            v                                               v
-+---------------------------------------+       +-------------------------+
-| HUMAN TIER-3 REVIEW QUEUE             |       | VERIFIED RESPONSE TO    |
-| (Clustered & Anomaly Filtered)        |       | CUSTOMER / COMMUNITY    |
-+---------------------------------------+       +-------------------------+
-              </code></pre>
+            
+            <div class="arch-flow">
+              <div class="arch-node arch-node--input">
+                <span class="arch-tag">Ingress</span>
+                <h4>Incoming User Interaction</h4>
+                <p>Social messages, Discord/Telegram posts, customer support inquiries</p>
+              </div>
+
+              <div class="arch-arrow">↓</div>
+
+              <div class="arch-node">
+                <span class="arch-tag">Gateway 0</span>
+                <h4>Deterministic Guardrails</h4>
+                <p>IP reputation, rate limiters, regex token blocklist, signature matching</p>
+              </div>
+
+              <div class="arch-arrow">↓</div>
+
+              <div class="arch-node">
+                <span class="arch-tag">Gateway 1</span>
+                <h4>Engagement Governor</h4>
+                <p>Turn count ceiling, sentiment trajectory decay, cosine prompt similarity loop breaker</p>
+              </div>
+
+              <div class="arch-arrow">↓</div>
+
+              <div class="arch-node">
+                <span class="arch-tag">Gateway 2</span>
+                <h4>Tiered Model Routing</h4>
+                <p>SLM classifier intent triage &rarr; domain-specific LLM (bounded output tokens)</p>
+              </div>
+
+              <div class="arch-arrow">↓</div>
+
+              <div class="arch-node arch-node--policy">
+                <span class="arch-tag">Gateway 3</span>
+                <h4>Independent Tool Policy Middleware</h4>
+                <p>Deterministic authorization, role-based tool access, parameter validation (Decoupled from LLM)</p>
+              </div>
+
+              <div class="arch-split">
+                <div class="arch-branch">
+                  <span class="arch-branch-label">State Mutation / Escalation</span>
+                  <div class="arch-arrow">↓</div>
+                  <div class="arch-node arch-node--alert">
+                    <span class="arch-tag">Tier 3 Review</span>
+                    <h4>Human Review Queue</h4>
+                    <p>Clustered incidents, anomaly filtered, structured context briefing</p>
+                  </div>
+                </div>
+
+                <div class="arch-branch">
+                  <span class="arch-branch-label">Validated Read Query</span>
+                  <div class="arch-arrow">↓</div>
+                  <div class="arch-node arch-node--success">
+                    <span class="arch-tag">Resolution</span>
+                    <h4>Verified Response Output</h4>
+                    <p>Returned safely to customer or public community channel</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -705,16 +733,20 @@ const sections = [
   margin-block: var(--space-6);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  background: var(--bg-surface);
 }
 .playbook-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  table-layout: auto;
 }
 .playbook-table th, .playbook-table td {
-  padding: var(--space-4);
+  padding: var(--space-4) var(--space-5);
   text-align: left;
+  vertical-align: top;
   border-bottom: 1px solid var(--border-soft);
+  line-height: 1.6;
 }
 .playbook-table th {
   background: var(--bg-elevated);
@@ -722,9 +754,147 @@ const sections = [
   font-size: 0.75rem;
   color: var(--text-faint);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
-.playbook-table tbody tr:hover { background: var(--bg-surface); }
+.playbook-table td strong {
+  color: var(--text);
+  white-space: nowrap;
+}
+.playbook-table tbody tr:hover { background: var(--bg-elevated); }
+
+/* Custom column widths for tables to prevent awkward wrapping */
+#threat-taxonomy .playbook-table th:nth-child(1),
+#threat-taxonomy .playbook-table td:nth-child(1) {
+  min-width: 180px;
+  width: 20%;
+}
+#threat-taxonomy .playbook-table th:nth-child(2),
+#threat-taxonomy .playbook-table td:nth-child(2) {
+  min-width: 160px;
+  width: 18%;
+}
+
+#tool-governance .playbook-table th:nth-child(1),
+#tool-governance .playbook-table td:nth-child(1) {
+  min-width: 190px;
+  width: 25%;
+}
+
+#maturity-model .playbook-table th:nth-child(1),
+#maturity-model .playbook-table td:nth-child(1) {
+  width: 120px;
+  min-width: 110px;
+}
+#maturity-model .playbook-table th:nth-child(2),
+#maturity-model .playbook-table td:nth-child(2) {
+  width: 130px;
+  min-width: 120px;
+}
+
+/* Modern Architecture Visual Flow */
+.arch-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-block: var(--space-6);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+}
+.arch-node {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.arch-node h4 {
+  font-size: 0.95rem;
+  margin: var(--space-1) 0;
+  color: var(--text);
+}
+.arch-node p {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.arch-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.arch-arrow {
+  color: var(--terracotta);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: var(--space-2) 0;
+  user-select: none;
+}
+.arch-node--input {
+  border-color: rgba(194, 94, 62, 0.4);
+  background: rgba(194, 94, 62, 0.06);
+}
+.arch-node--policy {
+  border-color: rgba(212, 151, 59, 0.5);
+  background: rgba(212, 151, 59, 0.06);
+}
+.arch-node--policy .arch-tag {
+  color: var(--ochre);
+}
+.arch-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 640px;
+  margin-top: var(--space-3);
+}
+.arch-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.arch-branch-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  height: 2.2em;
+  display: flex;
+  align-items: flex-end;
+}
+.arch-node--alert {
+  border-color: rgba(194, 94, 62, 0.4);
+}
+.arch-node--alert .arch-tag {
+  color: var(--terracotta);
+}
+.arch-node--success {
+  border-color: rgba(74, 104, 85, 0.5);
+}
+.arch-node--success .arch-tag {
+  color: var(--sage-light);
+}
+
+@media (max-width: 640px) {
+  .arch-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
 
 .steps-flow {
   display: grid;
@@ -747,17 +917,7 @@ const sections = [
 .step-box h4 { margin-block: var(--space-2); font-size: 1rem; }
 .step-box p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 
-.architecture-block pre {
-  margin: 0;
-  padding: var(--space-5);
-  background: var(--bg-base);
-  border-radius: var(--radius-md);
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--sage-light);
-  line-height: 1.35;
-}
+
 
 .metrics-grid {
   display: grid;
