@@ -7,20 +7,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Adrian Lee speaks on community strategy, platform safety, and AI governance. Available for conferences, executive offsites, and policy convenings."
 >
   <div class="speaking-page" style="padding-top: var(--nav-h);">
-    <div class="page-header">
-      <div class="container">
-        <div class="section-label"><span class="label">Speaking</span></div>
-        <h1 class="page-header__title">
-          Talks grounded in<br>
-          <em>frontline operations.</em>
-        </h1>
-        <p class="page-header__desc">
-          Keynotes and workshops on community strategy, platform safety, and practical AI governance. 
-          Focused on real case studies, operational systems, and actionable takeaways for your audience.
-        </p>
-        <a href="/contact" class="btn btn-primary" style="margin-top: var(--space-6); display: inline-flex;" id="speaking-book-hero">
-          Book Adrian for your event →
-        </a>
+    <div class="page-header speaking-header">
+      <div class="container speaking-header__inner">
+        <div class="speaking-header__text">
+          <div class="section-label"><span class="label">Speaking &amp; Keynotes</span></div>
+          <h1 class="page-header__title">
+            Talks grounded in<br>
+            <em>frontline operations.</em>
+          </h1>
+          <p class="page-header__desc">
+            Keynotes and workshops on community strategy, platform safety, and practical AI governance. 
+            Focused on real case studies, operational systems, and actionable takeaways for your audience.
+          </p>
+          <div class="speaking-header__actions">
+            <a href="/contact?type=speaking" class="btn btn-primary btn-lg" id="speaking-book-hero">
+              Book Adrian for your event →
+            </a>
+            <a href="#topics-heading" class="btn btn-outline btn-lg">View Signature Talks</a>
+          </div>
+        </div>
+        <div class="speaking-header__portrait-frame">
+          <img
+            src="/images/adrian-speaking.jpg"
+            alt="Adrian Lee, Keynote Speaker & Workshop Facilitator"
+            width="360"
+            height="460"
+            loading="eager"
+            class="speaking-header__portrait"
+          />
+        </div>
       </div>
     </div>
 
@@ -176,6 +191,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
+
+/* SPEAKING HERO LAYOUT */
+.speaking-header__inner {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-12);
+  align-items: center;
+}
+.speaking-header__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+.speaking-header__portrait-frame {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+}
+.speaking-header__portrait {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+@media (max-width: 860px) {
+  .speaking-header__inner {
+    grid-template-columns: 1fr;
+  }
+  .speaking-header__portrait-frame {
+    order: -1;
+    max-width: 300px;
+    margin: 0 auto var(--space-6);
+  }
+  .speaking-header__portrait {
+    height: 360px;
+  }
+}
+
 /* TOPICS */
 .topics h2 { margin-bottom: var(--space-10); }
 .topics__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
