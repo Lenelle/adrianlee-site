@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const aiEntries = [
+  {
+    slug: 'participatory-red-teaming',
+    title: 'Participatory Red-Teaming: Community as a Safety Mechanism',
+    description: 'How involving community members in adversarial AI testing produces safer, more representative outcomes than internal teams alone.',
+    category: 'Red-Teaming',
+    tags: ['Red-Teaming', 'Participation', 'Safety'],
+    maturity: 'budding',
+    readTime: '10 min',
+    lastRevised: '2025-06',
+  },
+  {
+    slug: 'caigp-certification',
+    title: 'What the CAIGP Certification Actually Covers',
+    description: 'A practitioner\'s honest breakdown of the Certified AI Governance Professional curriculum — what it teaches, what it misses, and how it applies in the real world.',
+    category: 'Certification',
+    tags: ['CAIGP', 'Certification', 'Fundamentals'],
+    maturity: 'evergreen',
+    readTime: '6 min',
+    lastRevised: '2025-03',
+  },
+  {
+    slug: 'ai-governance-community-overlap',
+    title: 'Where Community Design and AI Governance Overlap',
+    description: 'The structural similarities between governing online communities and governing AI systems — and what each field can learn from the other.',
+    category: 'Frameworks',
+    tags: ['Community', 'Frameworks', 'Cross-disciplinary'],
+    maturity: 'budding',
+    readTime: '11 min',
+    lastRevised: '2025-05',
+  },
+  {
+    slug: 'human-in-the-loop',
+    title: 'Human-in-the-Loop: What It Means in Practice',
+    description: 'Beyond the buzzword — what genuine human oversight of AI systems actually requires, and where most implementations fall short.',
+    category: 'Policy',
+    tags: ['HITL', 'Oversight', 'Policy'],
+    maturity: 'seedling',
+    readTime: '8 min',
+    lastRevised: '2025-07',
+  },
+];
+
+const maturityMap = {
+  seedling: { label: '🌱 Seedling', className: 'maturity--seedling' },
+  budding: { label: '🌿 Budding', className: 'maturity--budding' },
+  evergreen: { label: '🌲 Evergreen', className: 'maturity--evergreen' },
+};
+---
+
+<BaseLayout
+  title="AI Governance"
+  description="Frameworks, research notes, and practitioner thinking on AI governance, ethics, and participatory AI safety. By a Certified AI Governance Professional."
+>
+
+  <div class="ai-page" style="padding-top: var(--nav-h);">
+    <div class="page-header">
+      <div class="container">
+        <div class="section-label"><span class="label">AI Governance</span></div>
+        <h1 class="page-header__title">
+          Making AI<br>
+          <em>trustworthy at scale.</em>
+        </h1>
+        <p class="page-header__desc">
+          Practitioner perspectives on AI governance, ethics, and participatory safety. 
+          Written from the intersection of community design and governance frameworks — 
+          by a Certified AI Governance Professional.
+        </p>
+      </div>
+    </div>
+
+    <!-- POSITIONING BRIDGE -->
+    <section class="ai-bridge section--sm" aria-labelledby="bridge-heading">
+      <div class="container container--narrow">
+        <blockquote class="ai-bridge__quote" id="bridge-heading">
+          "The communities that built social platforms needed governance systems to stay trustworthy. 
+          AI is no different — and it needs the same participatory design principles we learned to apply 
+          to communities."
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ENTRIES -->
+    <section class="ai-entries section" aria-labelledby="ai-entries-heading">
+      <div class="container">
+        <h2 id="ai-entries-heading" class="sr-only">AI Governance entries</h2>
+
+        <div class="ai-entries__grid">
+          {aiEntries.map((entry) => {
+            const maturity = maturityMap[entry.maturity as keyof typeof maturityMap];
+            return (
+              <a href={`/ai-governance/${entry.slug}`} class="ai-entry__card card card--clickable card--ai" id={`ai-${entry.slug}`}>
+                <div class="ai-entry__meta">
+                  <span class="badge badge--ai">{entry.category}</span>
+                  <span class={`maturity ${maturity.className}`}>{maturity.label}</span>
+                </div>
+                <h3 class="ai-entry__title">{entry.title}</h3>
+                <p class="ai-entry__desc">{entry.description}</p>
+                <div class="ai-entry__tags">
+                  {entry.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <div class="ai-entry__footer">
+                  <span class="read-time">{entry.readTime} read</span>
+                  <span class="ai-entry__arrow">→</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- ADVISORY CTA -->
+    <section class="ai-cta section--sm" aria-labelledby="ai-cta-heading">
+      <div class="container container--narrow">
+        <div class="card card--featured ai-cta__card">
+          <span class="badge badge--ai" style="margin-bottom: var(--space-4); display: inline-flex;">AI Governance Advisory</span>
+          <h2 id="ai-cta-heading">Need AI governance expertise for your organization?</h2>
+          <p>I advise think tanks, policy organizations, and technology companies on AI governance frameworks, participatory safety programs, and ethics implementation.</p>
+          <div class="ai-cta__buttons">
+            <a href="/services#service-ai" class="btn btn-primary" id="ai-services-cta">View advisory services →</a>
+            <a href="/contact" class="btn btn-outline" id="ai-contact-cta">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</BaseLayout>
+
+<style>
+.ai-bridge { background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.ai-bridge__quote {
+  border-left: 3px solid var(--ochre);
+  padding: var(--space-6) var(--space-8);
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.ai-entries__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+.ai-entry__card { padding: var(--space-7); text-decoration: none; color: inherit; }
+.ai-entry__meta { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+.ai-entry__title { font-size: 1.2rem; margin-bottom: var(--space-3); line-height: 1.35; }
+.ai-entry__desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-5); }
+.ai-entry__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+.tag {
+  padding: 0.2em 0.65em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+.ai-entry__footer { display: flex; justify-content: space-between; align-items: center; }
+.ai-entry__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
+.ai-entry__card:hover .ai-entry__arrow { color: var(--ochre); transform: translateX(4px); }
+
+@media (max-width: 768px) { .ai-entries__grid { grid-template-columns: 1fr; } }
+
+.ai-cta__card { padding: var(--space-10); }
+.ai-cta__card h2 { font-size: clamp(1.375rem, 3vw, 2rem); margin-bottom: var(--space-4); }
+.ai-cta__card > p { color: var(--text-muted); margin-bottom: var(--space-8); max-width: 520px; }
+.ai-cta__buttons { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+</style>

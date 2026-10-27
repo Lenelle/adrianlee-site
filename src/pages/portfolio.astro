@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Case studies from Adrian Lee's work building and governing communities across gaming, fintech, and consumer technology at global scale."
+>
+  <div class="portfolio-page" style="padding-top: var(--nav-h);">
+    <div class="page-header">
+      <div class="container">
+        <div class="section-label"><span class="label">Portfolio</span></div>
+        <h1 class="page-header__title">
+          Work that<br>
+          <em>moved the needle.</em>
+        </h1>
+        <p class="page-header__desc">
+          Selected case studies from a decade of community strategy and platform safety work. 
+          Details are shared with permission — full case studies available on request.
+        </p>
+      </div>
+    </div>
+
+    <section class="cases section" aria-labelledby="cases-heading">
+      <div class="container">
+        <h2 class="sr-only" id="cases-heading">Case studies</h2>
+
+        <!-- Case 1 -->
+        <article class="case" aria-labelledby="case-crypto-heading">
+          <div class="case__header">
+            <div>
+              <div class="case__orgs">
+                <span class="badge badge--ai">Crypto Exchange</span>
+                <span class="badge badge--community">Community Strategy</span>
+              </div>
+              <h2 id="case-crypto-heading">
+                Rebuilding community trust after a major platform crisis
+              </h2>
+            </div>
+            <div class="case__meta">
+              <span class="read-time">Global-scale · 2M+ community</span>
+            </div>
+          </div>
+          <div class="case__body">
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The challenge</span>
+                <p>A global crypto exchange faced significant community trust erosion following a high-profile security incident. Community sentiment had collapsed, moderator burnout was at an all-time high, and the platform's forum had become a hub for misinformation and panic.</p>
+              </div>
+              <div class="case__block">
+                <span class="label">The approach</span>
+                <p>Designed and implemented a phased community recovery framework: established a transparent incident communication cadence, rebuilt moderation infrastructure with clearer escalation paths, launched a community council for co-governance of major product decisions, and redesigned the onboarding experience to set better expectations upfront.</p>
+              </div>
+            </div>
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The outcome</span>
+                <div class="case__stats">
+                  <div class="case__stat">
+                    <span class="case__stat-num">68%</span>
+                    <span class="case__stat-label">reduction in negative sentiment posts over 90 days</span>
+                  </div>
+                  <div class="case__stat">
+                    <span class="case__stat-num">3×</span>
+                    <span class="case__stat-label">increase in community moderator retention</span>
+                  </div>
+                  <div class="case__stat">
+                    <span class="case__stat-num">40%</span>
+                    <span class="case__stat-label">increase in community-sourced product feedback quality</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="divider"></div>
+
+        <!-- Case 2 -->
+        <article class="case" aria-labelledby="case-gaming-heading">
+          <div class="case__header">
+            <div>
+              <div class="case__orgs">
+                <span class="badge badge--community">Gaming</span>
+                <span class="badge badge--ai">Platform Safety</span>
+              </div>
+              <h2 id="case-gaming-heading">
+                Building a moderation system for 5M+ concurrent players
+              </h2>
+            </div>
+            <div class="case__meta">
+              <span class="read-time">Asia Pacific · 5M+ players</span>
+            </div>
+          </div>
+          <div class="case__body">
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The challenge</span>
+                <p>A major gaming platform's moderation infrastructure had not scaled alongside its player base. Ticket backlogs were running 14+ days, community toxicity was rising, and the existing moderation playbook was entirely reactive with no systemic approach to prevention.</p>
+              </div>
+              <div class="case__block">
+                <span class="label">The approach</span>
+                <p>Built a tiered moderation architecture: automated first-pass filtering for high-volume, low-complexity violations; a trained volunteer moderator corps for community-level issues; and a specialist team for complex cases. Developed a complete moderation playbook, appeals process, and metrics dashboard to track system health.</p>
+              </div>
+            </div>
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The outcome</span>
+                <div class="case__stats">
+                  <div class="case__stat">
+                    <span class="case__stat-num">14d→2d</span>
+                    <span class="case__stat-label">average moderation ticket resolution time</span>
+                  </div>
+                  <div class="case__stat">
+                    <span class="case__stat-num">52%</span>
+                    <span class="case__stat-label">reduction in repeat offenders within 30 days</span>
+                  </div>
+                  <div class="case__stat">
+                    <span class="case__stat-num">200+</span>
+                    <span class="case__stat-label">volunteer moderators trained and retained</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="divider"></div>
+
+        <!-- Case 3 -->
+        <article class="case" aria-labelledby="case-trust-heading">
+          <div class="case__header">
+            <div>
+              <div class="case__orgs">
+                <span class="badge badge--ai">Trust &amp; Safety</span>
+                <span class="badge badge--ai">AI Governance</span>
+              </div>
+              <h2 id="case-trust-heading">
+                Designing a community-participatory AI feedback program
+              </h2>
+            </div>
+            <div class="case__meta">
+              <span class="read-time">Consumer Tech · Policy Program</span>
+            </div>
+          </div>
+          <div class="case__body">
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The challenge</span>
+                <p>A consumer tech organization needed to incorporate diverse community perspectives into AI system evaluation without the process becoming performative or generating input that couldn't be actioned by engineering and policy teams.</p>
+              </div>
+              <div class="case__block">
+                <span class="label">The approach</span>
+                <p>Designed a structured participatory evaluation program: clear scope and input categories, trained community evaluators, structured feedback templates that mapped to technical evaluation criteria, and a transparent feedback loop showing participants how their input influenced decisions.</p>
+              </div>
+            </div>
+            <div class="case__col">
+              <div class="case__block">
+                <span class="label">The outcome</span>
+                <div class="case__stats">
+                  <div class="case__stat">
+                    <span class="case__stat-num">89%</span>
+                    <span class="case__stat-label">of community evaluator input classified as "actionable" by engineering team</span>
+                  </div>
+                  <div class="case__stat">
+                    <span class="case__stat-num">12</span>
+                    <span class="case__stat-label">previously unidentified failure modes surfaced in first evaluation cycle</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- REQUEST CTA -->
+    <section class="portfolio-cta section--sm" aria-labelledby="portfolio-cta-heading">
+      <div class="container container--narrow">
+        <div class="card card--featured portfolio-cta__card">
+          <h2 id="portfolio-cta-heading">Need the full story?</h2>
+          <p>Full case studies with detailed methodology and outcomes are available for serious enquiries. Reach out with context about your situation.</p>
+          <a href="/contact" class="btn btn-primary" id="portfolio-contact-cta">Request full case studies →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+/* CASE STUDIES */
+.case { padding-block: var(--space-8); }
+.case__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.case__orgs { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-4); }
+.case__header h2 { font-size: clamp(1.375rem, 2.5vw, 2rem); max-width: 600px; }
+.case__meta { flex-shrink: 0; padding-top: var(--space-2); }
+
+.case__body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); }
+.case__col { display: flex; flex-direction: column; gap: var(--space-6); }
+.case__block .label { display: block; margin-bottom: var(--space-3); }
+.case__block p { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7; }
+
+.case__stats { display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-4); }
+.case__stat {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+}
+.case__stat-num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--terracotta);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+}
+.case__stat-label { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 768px) {
+  .case__header { flex-direction: column; }
+  .case__body { grid-template-columns: 1fr; gap: var(--space-6); }
+}
+
+.portfolio-cta__card { padding: var(--space-10); text-align: center; }
+.portfolio-cta__card h2 { margin-bottom: var(--space-4); }
+.portfolio-cta__card > p { color: var(--text-muted); margin-bottom: var(--space-8); max-width: 440px; margin-inline: auto; margin-bottom: var(--space-8); }
+</style>

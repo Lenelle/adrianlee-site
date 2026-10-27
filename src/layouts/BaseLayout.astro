@@ -1,0 +1,153 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description = 'Adrian Lee — Community Ecosystem Strategist, AI Governance Professional, and Platform Safety expert. Building communities that matter and the governance systems to sustain them.',
+  ogImage = '/og-default.jpg',
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
+const fullTitle = title === 'Adrian Lee' ? title : `${title} — Adrian Lee`;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="noise">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Primary SEO -->
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+  <meta property="og:site_name" content="Adrian Lee" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="/" class="nav__logo" aria-label="Adrian Lee - Home">Adrian Lee</a>
+
+      <ul class="nav__links" role="list">
+        <li><a href="/about" class={currentPath === '/about' ? 'active' : ''}>About</a></li>
+        <li><a href="/services" class={currentPath === '/services' ? 'active' : ''}>Services</a></li>
+        <li><a href="/playbook" class={currentPath.startsWith('/playbook') ? 'active' : ''}>Playbook</a></li>
+        <li><a href="/ai-governance" class={currentPath.startsWith('/ai-governance') ? 'active' : ''}>AI Governance</a></li>
+        <li><a href="/portfolio" class={currentPath === '/portfolio' ? 'active' : ''}>Portfolio</a></li>
+        <li><a href="/speaking" class={currentPath === '/speaking' ? 'active' : ''}>Speaking</a></li>
+        <li><a href="/contact" class="nav__cta">Work With Me</a></li>
+      </ul>
+
+      <button
+        class="nav__hamburger"
+        id="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" id="menu-line-1"/>
+          <line x1="3" y1="12" x2="21" y2="12" id="menu-line-2"/>
+          <line x1="3" y1="18" x2="21" y2="18" id="menu-line-3"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/playbook">Playbook</a>
+    <a href="/ai-governance">AI Governance</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/speaking">Speaking</a>
+    <a href="/contact" style="color: var(--terracotta); font-weight: 600;">Work With Me →</a>
+  </div>
+
+  <!-- Main content -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">Adrian Lee</div>
+          <p class="footer__tagline">
+            Community ecosystems, platform safety, and AI governance — 
+            <em>building the human systems that make technology trustworthy.</em>
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="footer__links" role="list">
+            <li><a href="/about">About</a></li>
+            <li><a href="/playbook">Playbook</a></li>
+            <li><a href="/ai-governance">AI Governance</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__copy">
+        <span>&copy; {new Date().getFullYear()} Adrian Lee. All rights reserved.</span>
+        <span>
+          <a href="https://linkedin.com/in/adrianlee" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = mobileMenu?.classList.contains('open');
+      mobileMenu?.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        toggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>

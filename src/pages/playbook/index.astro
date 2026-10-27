@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const playbook = [
+  {
+    slug: 'community-onboarding-playbook',
+    title: 'The Community Onboarding Playbook',
+    description: 'A step-by-step framework for welcoming new members in ways that create long-term belonging — not just a welcome DM.',
+    tags: ['Onboarding', 'Member Journey', 'Retention'],
+    maturity: 'evergreen',
+    readTime: '8 min',
+    lastRevised: '2025-03',
+  },
+  {
+    slug: 'moderation-at-scale',
+    title: 'Moderation at Scale: What Global Platforms Get Wrong',
+    description: 'Lessons from moderating communities of millions — and the human systems required to make it humane and scalable.',
+    tags: ['Moderation', 'Platform Safety', 'Scale'],
+    maturity: 'budding',
+    readTime: '12 min',
+    lastRevised: '2025-06',
+  },
+  {
+    slug: 'community-health-metrics',
+    title: 'Community Health Metrics That Actually Matter',
+    description: 'Moving beyond vanity metrics like MAU. A framework for measuring community vitality, belonging, and business impact.',
+    tags: ['Metrics', 'Strategy', 'Analytics'],
+    maturity: 'budding',
+    readTime: '10 min',
+    lastRevised: '2025-04',
+  },
+  {
+    slug: 'governance-structures-101',
+    title: 'Community Governance Structures 101',
+    description: 'When to use councils, working groups, elected moderators, and other governance structures — and when not to.',
+    tags: ['Governance', 'Structure', 'Leadership'],
+    maturity: 'evergreen',
+    readTime: '9 min',
+    lastRevised: '2025-02',
+  },
+  {
+    slug: 'discord-vs-community-platforms',
+    title: 'Choosing a Community Platform: Discord, Circle, Discourse, and More',
+    description: 'A decision framework for selecting community infrastructure based on your audience, goals, and growth stage.',
+    tags: ['Tech Stack', 'Platform', 'Tools'],
+    maturity: 'budding',
+    readTime: '7 min',
+    lastRevised: '2025-05',
+  },
+  {
+    slug: 'community-champions-program',
+    title: 'Building a Community Champions Program',
+    description: 'How to design, recruit, and sustain a volunteer leader program that doesn\'t burn people out.',
+    tags: ['Champions', 'Volunteers', 'Leadership'],
+    maturity: 'seedling',
+    readTime: '6 min',
+    lastRevised: '2025-07',
+  },
+];
+
+const maturityMap = {
+  seedling: { label: '🌱 Seedling', className: 'maturity--seedling' },
+  budding: { label: '🌿 Budding', className: 'maturity--budding' },
+  evergreen: { label: '🌲 Evergreen', className: 'maturity--evergreen' },
+};
+---
+
+<BaseLayout
+  title="Community Playbook"
+  description="Evergreen frameworks, playbooks, and tactical guides for community builders. Written from a decade of practice across gaming, crypto, and consumer tech."
+>
+
+  <div class="playbook-page" style="padding-top: var(--nav-h);">
+    <div class="page-header">
+      <div class="container">
+        <div class="section-label"><span class="label">Community Playbook</span></div>
+        <h1 class="page-header__title">
+          The open-source<br>
+          <em>community handbook.</em>
+        </h1>
+        <p class="page-header__desc">
+          Battle-tested frameworks, honest post-mortems, and tactical guides built from 
+          a decade of community practice. Updated continuously. Always free.
+        </p>
+        <div class="playbook-header__meta">
+          <div class="maturity-legend">
+            <span class="maturity maturity--seedling">🌱 Seedling — early notes</span>
+            <span class="maturity maturity--budding">🌿 Budding — structured &amp; tested</span>
+            <span class="maturity maturity--evergreen">🌲 Evergreen — battle-tested</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="playbook-entries section" aria-labelledby="entries-heading">
+      <div class="container">
+        <h2 id="entries-heading" class="sr-only">All playbook entries</h2>
+
+        <div class="entries__grid">
+          {playbook.map((entry) => {
+            const maturity = maturityMap[entry.maturity as keyof typeof maturityMap];
+            return (
+              <a href={`/playbook/${entry.slug}`} class="entry__card card card--clickable card--community" id={`entry-${entry.slug}`}>
+                <div class="entry__meta">
+                  <span class={`maturity ${maturity.className}`}>{maturity.label}</span>
+                  <span class="read-time">{entry.readTime} read</span>
+                </div>
+                <h3 class="entry__title">{entry.title}</h3>
+                <p class="entry__desc">{entry.description}</p>
+                <div class="entry__tags">
+                  {entry.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <div class="entry__footer">
+                  <span class="entry__revised">Last revised {entry.lastRevised}</span>
+                  <span class="entry__arrow">→</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER CTA -->
+    <section class="playbook-cta section--sm" aria-labelledby="playbook-cta-heading">
+      <div class="container container--narrow">
+        <div class="card card--featured playbook-cta__inner">
+          <h2 id="playbook-cta-heading">New entries land in your inbox</h2>
+          <p>Get notified when new playbook entries are published. No fluff — only practice-ready content.</p>
+          <form class="playbook-cta__form" action="#" method="POST" aria-label="Newsletter signup">
+            <div class="playbook-cta__input-row">
+              <input type="email" id="playbook-email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address" />
+              <button type="submit" class="btn btn-primary" id="playbook-subscribe-btn">Subscribe →</button>
+            </div>
+          </form>
+          <p class="playbook-cta__note">No spam. Unsubscribe any time.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</BaseLayout>
+
+<style>
+.playbook-header__meta { margin-top: var(--space-6); }
+.maturity-legend { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+.maturity-legend .maturity { font-size: 0.875rem; }
+
+.entries__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+.entry__card { padding: var(--space-7); text-decoration: none; color: inherit; }
+.entry__meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4); }
+.entry__title { font-size: 1.2rem; margin-bottom: var(--space-3); line-height: 1.35; color: var(--text); }
+.entry__desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-5); }
+.entry__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+.tag {
+  padding: 0.2em 0.65em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+.entry__footer { display: flex; justify-content: space-between; align-items: center; }
+.entry__revised { font-size: 0.8125rem; color: var(--text-faint); font-family: var(--font-mono); }
+.entry__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
+.entry__card:hover .entry__arrow { color: var(--sage-light); transform: translateX(4px); }
+
+@media (max-width: 768px) { .entries__grid { grid-template-columns: 1fr; } }
+
+.playbook-cta__inner { padding: var(--space-10); text-align: center; }
+.playbook-cta__inner h2 { margin-bottom: var(--space-4); }
+.playbook-cta__inner > p { color: var(--text-muted); margin-bottom: var(--space-6); }
+.playbook-cta__form { max-width: 440px; margin-inline: auto; }
+.playbook-cta__input-row { display: flex; gap: var(--space-3); }
+.playbook-cta__input-row input { flex: 1; }
+.playbook-cta__note { font-size: 0.8125rem; color: var(--text-faint); margin-top: var(--space-4); }
+@media (max-width: 480px) { .playbook-cta__input-row { flex-direction: column; } }
+</style>

@@ -1,0 +1,178 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date?: string;
+  maturity?: 'seedling' | 'budding' | 'evergreen';
+  tags?: string[];
+  readTime?: string;
+  type?: 'community' | 'ai';
+}
+
+const {
+  title,
+  description,
+  date = '2025-06',
+  maturity = 'evergreen',
+  tags = [],
+  readTime = '8 min',
+  type = 'community'
+} = Astro.props;
+
+const maturityMap = {
+  seedling: { label: '🌱 Seedling', className: 'maturity--seedling' },
+  budding: { label: '🌿 Budding', className: 'maturity--budding' },
+  evergreen: { label: '🌲 Evergreen', className: 'maturity--evergreen' },
+};
+
+const backLink = type === 'ai' ? '/ai-governance' : '/playbook';
+const backLabel = type === 'ai' ? '← Back to AI Governance' : '← Back to Playbook';
+const badgeClass = type === 'ai' ? 'badge--ai' : 'badge--community';
+const typeLabel = type === 'ai' ? 'AI Governance' : 'Playbook';
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="article-page">
+    <header class="article-header">
+      <div class="container container--narrow">
+        <a href={backLink} class="article-back">{backLabel}</a>
+        
+        <div class="article-meta">
+          <span class={`badge ${badgeClass}`}>{typeLabel}</span>
+          <span class={`maturity ${maturityMap[maturity].className}`}>{maturityMap[maturity].label}</span>
+          <span class="read-time">{readTime} read</span>
+          <span class="article-date">Revised {date}</span>
+        </div>
+
+        <h1 class="article-title">{title}</h1>
+        <p class="article-lead">{description}</p>
+
+        {tags.length > 0 && (
+          <div class="article-tags">
+            {tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="container container--narrow">
+      <div class="article-content prose">
+        <slot />
+      </div>
+
+      <footer class="article-footer card card--featured">
+        <h3>About this living document</h3>
+        <p>
+          This is an evergreen note maintained by Adrian Lee. It is continuously updated as new operational lessons, 
+          governance models, and real-world incidents unfold. Found an error or want to share feedback?
+        </p>
+        <div class="article-footer__actions">
+          <a href="/contact" class="btn btn-outline btn-sm">Share Feedback / Discuss</a>
+          <a href={backLink} class="btn btn-ghost btn-sm">{backLabel}</a>
+        </div>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.article-page {
+  padding-top: calc(var(--nav-h) + var(--space-8));
+  padding-bottom: var(--space-20);
+}
+
+.article-header {
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: var(--space-8);
+}
+
+.article-back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+  margin-bottom: var(--space-6);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.article-back:hover {
+  color: var(--terracotta);
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.article-date {
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+}
+
+.article-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-5);
+}
+
+.article-lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: 0.2em 0.65em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+
+.article-content {
+  margin-bottom: var(--space-16);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.article-footer {
+  padding: var(--space-8);
+}
+
+.article-footer h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-2);
+}
+
+.article-footer p {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.article-footer__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+</style>
