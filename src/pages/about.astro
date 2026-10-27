@@ -238,22 +238,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <!-- CREDENTIALS -->
-    <section class="credentials section--sm" aria-labelledby="credentials-heading">
-      <div class="container">
-        <div class="section-label"><span class="label">Qualifications</span></div>
-        <h2 id="credentials-heading">Certifications</h2>
-        <div class="credentials__grid">
-          <div class="credential__card card card--featured">
-            <div class="credential__icon">🏛️</div>
-            <h3>Certified AI Governance Professional (AIGP)</h3>
-            <p>SMU Academy programme, jointly certified with the AI Verify Foundation and endorsed by IMDA. Covers AI risk management frameworks, operational guardrails, and governance alignment with Singapore's MAS AI Risk Management Guidelines and global standards.</p>
-            <span class="badge badge--ai" style="margin-top: 0.75rem; display: inline-flex;">AI Governance</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="about-cta section--sm" aria-labelledby="about-cta-heading">
       <div class="container">
@@ -327,14 +311,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .timeline__role { font-size: 1.1rem; margin-bottom: var(--space-3); }
 .timeline__content p { color: var(--text-muted); font-size: 0.9375rem; margin-bottom: var(--space-3); }
 .timeline__tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-
-/* CREDENTIALS */
-.credentials h2 { margin-bottom: var(--space-8); }
-.credentials__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5); }
-.credential__card { padding: var(--space-8); }
-.credential__icon { font-size: 2rem; margin-bottom: var(--space-4); }
-.credential__card h3 { font-size: 1.2rem; margin-bottom: var(--space-3); }
-.credential__card p { color: var(--text-muted); font-size: 0.9375rem; }
 
 /* CTA */
 .about-cta__inner { padding: var(--space-12); text-align: center; }
