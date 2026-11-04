@@ -478,32 +478,20 @@ code {
 .maturity--budding   { color: var(--budding); }
 .maturity--evergreen { color: var(--evergreen); }
 
-/* Status pill (Apple-Style Ambient Pill) */
-.status-pill {
+/* Executive Tag (Quiet, Understated Authority) */
+.executive-tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-full);
-  padding: 0.45rem 1.1rem;
+  padding: 0.4rem 1.1rem;
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--text);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-.status-pill .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--sage);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
 }
 
 /* ──────────────────────────────────────────
