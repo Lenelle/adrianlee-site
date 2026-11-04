@@ -77,7 +77,7 @@ const maturityMap = {
         <p class="page-header__desc">
           Practitioner perspectives on AI governance, safety, and participatory testing. 
           Written from the intersection of community operations and governance frameworks, 
-          by a Certified AI Governance Professional.
+          grounded in frontline operational practice.
         </p>
       </div>
     </div>
@@ -133,7 +133,7 @@ const maturityMap = {
           <h2 id="ai-cta-heading">Need AI governance guidance for your team?</h2>
           <p>I advise think tanks, policy organizations, and technology companies on practical AI governance controls, participatory red-teaming, and operational safety programs.</p>
           <div class="ai-cta__buttons">
-            <a href="/services#service-ai" class="btn btn-primary" id="ai-services-cta">View advisory services →</a>
+            <a href="/services#service-ai" class="btn btn-blue" id="ai-services-cta">View advisory services →</a>
             <a href="/contact" class="btn btn-outline" id="ai-contact-cta">Get in touch</a>
           </div>
         </div>
@@ -146,7 +146,7 @@ const maturityMap = {
 <style>
 .ai-bridge { background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .ai-bridge__quote {
-  border-left: 3px solid var(--ochre);
+  border-left: 3px solid var(--accent);
   padding: var(--space-6) var(--space-8);
   font-family: var(--font-serif);
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
@@ -176,12 +176,21 @@ const maturityMap = {
 }
 .ai-entry__footer { display: flex; justify-content: space-between; align-items: center; }
 .ai-entry__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
-.ai-entry__card:hover .ai-entry__arrow { color: var(--ochre); transform: translateX(4px); }
+.ai-entry__card:hover .ai-entry__arrow { color: var(--accent); transform: translateX(4px); }
 
 @media (max-width: 768px) { .ai-entries__grid { grid-template-columns: 1fr; } }
 
-.ai-cta__card { padding: var(--space-10); }
-.ai-cta__card h2 { font-size: clamp(1.375rem, 3vw, 2rem); margin-bottom: var(--space-4); }
-.ai-cta__card > p { color: var(--text-muted); margin-bottom: var(--space-8); max-width: 520px; }
+.ai-cta__card {
+  padding: var(--space-12);
+  background: var(--midnight-bg) !important;
+  color: #F5F5F7 !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.ai-cta__card h2 { color: #FFFFFF !important; font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: var(--space-4); }
+.ai-cta__card > p { color: #86868B !important; margin-bottom: var(--space-8); max-width: 520px; font-size: 1.05rem; }
 .ai-cta__buttons { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.ai-cta__buttons .btn-outline { color: #F5F5F7; border-color: rgba(255, 255, 255, 0.2); }
+.ai-cta__buttons .btn-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.4); }
 </style>

@@ -183,7 +183,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="card card--featured speaking-cta__card">
           <h2 id="speaking-cta-heading">Book Adrian for your event</h2>
           <p>Send your event outline and I will reply within 48 hours regarding availability and scope.</p>
-          <a href="/contact?type=speaking" class="btn btn-primary btn-lg" id="speaking-book-cta">Send speaking inquiry →</a>
+          <a href="/contact?type=speaking" class="btn btn-blue btn-lg" id="speaking-book-cta">Send speaking inquiry →</a>
         </div>
       </div>
     </section>
@@ -236,7 +236,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .topics h2 { margin-bottom: var(--space-10); }
 .topics__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
 .topic__card { padding: var(--space-8); }
-.topic__number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--terracotta); letter-spacing: 0.1em; margin-bottom: var(--space-4); }
+.topic__number { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: var(--space-4); }
 .topic__card h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); margin-bottom: var(--space-4); }
 .topic__badges { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-5); }
 .topic__card > p { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7; margin-bottom: var(--space-6); }
@@ -245,7 +245,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .topic__detail .label { font-size: 0.7rem; padding-top: 2px; }
 .topic__detail span:last-child { font-size: 0.9rem; color: var(--text-muted); }
 .topic__detail ul { font-size: 0.9rem; color: var(--text-muted); list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
-.topic__detail li::before { content: '→ '; color: var(--terracotta); }
+.topic__detail li::before { content: '→ '; color: var(--accent); }
 @media (max-width: 600px) {
   .topic__detail { grid-template-columns: 1fr; gap: var(--space-2); }
 }
@@ -260,7 +260,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 @media (max-width: 600px) { .logistics__grid { grid-template-columns: 1fr; } }
 
 /* CTA */
-.speaking-cta__card { padding: var(--space-10); text-align: center; }
-.speaking-cta__card h2 { margin-bottom: var(--space-4); }
-.speaking-cta__card > p { color: var(--text-muted); margin-bottom: var(--space-8); max-width: 440px; margin-inline: auto; margin-bottom: var(--space-8); }
+.speaking-cta__card {
+  padding: var(--space-12);
+  text-align: center;
+  background: var(--midnight-bg) !important;
+  color: #F5F5F7 !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.speaking-cta__card h2 { color: #FFFFFF !important; margin-bottom: var(--space-4); font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+.speaking-cta__card > p { color: #86868B !important; margin-bottom: var(--space-8); max-width: 460px; margin-inline: auto; font-size: 1.05rem; }
 </style>

@@ -101,7 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="service__block" id="service-speaking">
           <div class="service__label-col">
             <div class="section-label"><span class="label">03</span></div>
-            <span class="badge badge--terracotta">Speaking</span>
+            <span class="badge badge--community">Speaking</span>
           </div>
           <div class="service__content">
             <h2>Speaking &amp; Workshops</h2>
@@ -169,7 +169,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             I take on a limited number of clients at any time to maintain quality. 
             If you want to discuss your project, start with an introductory call.
           </p>
-          <a href="/contact" class="btn btn-primary btn-lg" id="services-contact-cta">Start the conversation →</a>
+          <a href="/contact" class="btn btn-blue btn-lg" id="services-contact-cta">Start the conversation →</a>
           <p class="services-cta__note">Usually responds within 48 hours.</p>
         </div>
       </div>
@@ -200,7 +200,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   padding-left: var(--space-6);
   transition: border-color var(--transition-fast);
 }
-.service__offering:hover { border-color: var(--terracotta); }
+.service__offering:hover { border-color: var(--accent); }
 .service__offering h3 { font-size: 1.1rem; margin-bottom: var(--space-2); }
 .service__offering p { color: var(--text-muted); font-size: 0.9375rem; }
 .service__who { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-5) var(--space-6); }
@@ -244,7 +244,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   margin-bottom: var(--space-5);
   transition: all var(--transition-normal);
 }
-.process__step:hover .process__num { border-color: var(--terracotta); color: var(--terracotta); background: var(--terracotta-glow); }
+.process__step:hover .process__num { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 .process__step h3 { font-size: 1.05rem; margin-bottom: var(--space-2); }
 .process__step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
 @media (max-width: 768px) {
@@ -257,8 +257,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 
 /* SERVICES CTA */
-.services-cta__card { padding: var(--space-12); text-align: center; }
-.services-cta__card h2 { margin-bottom: var(--space-4); }
-.services-cta__card > p { color: var(--text-muted); max-width: 480px; margin-inline: auto; margin-bottom: var(--space-8); }
-.services-cta__note { font-size: 0.8125rem; color: var(--text-faint); margin-top: var(--space-4); }
+.services-cta__card {
+  padding: var(--space-12);
+  text-align: center;
+  background: var(--midnight-bg) !important;
+  color: #F5F5F7 !important;
+  border: 1px solid var(--midnight-border) !important;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.services-cta__card h2 { color: #FFFFFF !important; margin-bottom: var(--space-4); font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+.services-cta__card > p { color: #86868B !important; max-width: 480px; margin-inline: auto; margin-bottom: var(--space-8); font-size: 1.05rem; }
+.services-cta__note { font-size: 0.8125rem; color: #6E6E73 !important; margin-top: var(--space-4); }
 </style>
