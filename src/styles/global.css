@@ -232,22 +232,21 @@ code {
 
 /* Midnight Contrast Section Utility */
 .section--midnight {
-  background-color: var(--midnight-bg);
-  color: var(--midnight-text);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--text);
+  border-top: 1px solid var(--border);
 }
 .section--midnight h1,
 .section--midnight h2,
 .section--midnight h3,
 .section--midnight h4 {
-  color: var(--midnight-text);
+  color: var(--text);
 }
 .section--midnight p {
-  color: var(--midnight-muted);
+  color: var(--text-muted);
 }
 .section--midnight .section-label {
-  color: var(--midnight-muted);
+  color: var(--text-muted);
 }
 .section--midnight .section-label::before {
   background: var(--accent);
@@ -421,22 +420,27 @@ code {
   background: var(--bg-surface);
 }
 
-/* Midnight Hero Bento Card */
-.card--midnight {
-  background: #0A0A0C !important;
-  color: #F5F5F7 !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25) !important;
+/* Flagship Bento Card (Cohesive Light Theme) */
+.card--midnight,
+.card--flagship {
+  background: #FFFFFF !important;
+  color: var(--text) !important;
+  border: 1px solid rgba(0, 113, 227, 0.24) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
 }
-.card--midnight h3 {
-  color: #FFFFFF !important;
+.card--midnight h3,
+.card--flagship h3 {
+  color: #1D1D1F !important;
 }
-.card--midnight p {
-  color: #86868B !important;
+.card--midnight p,
+.card--flagship p {
+  color: #6E6E73 !important;
 }
-.card--midnight:hover {
-  border-color: rgba(255, 255, 255, 0.28) !important;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35) !important;
+.card--midnight:hover,
+.card--flagship:hover {
+  border-color: rgba(0, 113, 227, 0.48) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 113, 227, 0.08) !important;
 }
 
 /* ──────────────────────────────────────────
