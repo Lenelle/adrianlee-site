@@ -9,8 +9,6 @@ const aiEntries = [
     category: 'Flagship Framework',
     tags: ['Agentic AI', 'Threat Modeling', 'Governance', 'Architecture'],
     maturity: 'evergreen',
-    readTime: '25 min',
-    lastRevised: '2026-08',
   },
   {
     slug: 'participatory-red-teaming',
@@ -19,8 +17,6 @@ const aiEntries = [
     category: 'Red-Teaming',
     tags: ['Red-Teaming', 'Participation', 'Safety'],
     maturity: 'budding',
-    readTime: '10 min',
-    lastRevised: '2025-06',
   },
   {
     slug: 'caigp-certification',
@@ -29,8 +25,6 @@ const aiEntries = [
     category: 'Certification',
     tags: ['CAIGP', 'Certification', 'Fundamentals'],
     maturity: 'evergreen',
-    readTime: '6 min',
-    lastRevised: '2025-03',
   },
   {
     slug: 'ai-governance-community-overlap',
@@ -39,8 +33,6 @@ const aiEntries = [
     category: 'Frameworks',
     tags: ['Community', 'Frameworks', 'Operations'],
     maturity: 'budding',
-    readTime: '11 min',
-    lastRevised: '2025-05',
   },
   {
     slug: 'human-in-the-loop',
@@ -49,8 +41,6 @@ const aiEntries = [
     category: 'Policy',
     tags: ['HITL', 'Oversight', 'Policy'],
     maturity: 'seedling',
-    readTime: '8 min',
-    lastRevised: '2025-07',
   },
 ];
 
@@ -115,7 +105,6 @@ const maturityMap = {
                   ))}
                 </div>
                 <div class="ai-entry__footer">
-                  <span class="read-time">{entry.readTime} read</span>
                   <span class="ai-entry__arrow">→</span>
                 </div>
               </a>
@@ -174,7 +163,7 @@ const maturityMap = {
   color: var(--text-faint);
   font-family: var(--font-mono);
 }
-.ai-entry__footer { display: flex; justify-content: space-between; align-items: center; }
+.ai-entry__footer { display: flex; justify-content: flex-end; align-items: center; }
 .ai-entry__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
 .ai-entry__card:hover .ai-entry__arrow { color: var(--accent); transform: translateX(4px); }
 

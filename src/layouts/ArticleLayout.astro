@@ -4,20 +4,16 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   description: string;
-  date?: string;
   maturity?: 'seedling' | 'budding' | 'evergreen';
   tags?: string[];
-  readTime?: string;
   type?: 'community' | 'ai';
 }
 
 const {
   title,
   description,
-  date = '2025-06',
   maturity = 'evergreen',
   tags = [],
-  readTime = '8 min',
   type = 'community'
 } = Astro.props;
 
@@ -42,8 +38,6 @@ const typeLabel = type === 'ai' ? 'AI Governance' : 'Playbook';
         <div class="article-meta">
           <span class={`badge ${badgeClass}`}>{typeLabel}</span>
           <span class={`maturity ${maturityMap[maturity].className}`}>{maturityMap[maturity].label}</span>
-          <span class="read-time">{readTime} read</span>
-          <span class="article-date">Revised {date}</span>
         </div>
 
         <h1 class="article-title">{title}</h1>

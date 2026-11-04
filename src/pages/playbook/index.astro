@@ -8,8 +8,6 @@ const playbook = [
     description: 'Defending AI agents against inference abuse, context pollution, tool abuse, and human-escalation exhaustion. A cross-platform framework for community and customer support.',
     tags: ['AI Governance', 'Agentic AI', 'Threat Modeling', 'Platform Safety'],
     maturity: 'evergreen',
-    readTime: '25 min',
-    lastRevised: '2026-08',
     featured: true,
   },
   {
@@ -18,8 +16,6 @@ const playbook = [
     description: 'A step-by-step framework for welcoming new members in ways that build lasting belonging rather than just an automated welcome note.',
     tags: ['Onboarding', 'Member Journey', 'Retention'],
     maturity: 'evergreen',
-    readTime: '8 min',
-    lastRevised: '2025-03',
   },
   {
     slug: 'moderation-at-scale',
@@ -27,8 +23,6 @@ const playbook = [
     description: 'Lessons from moderating communities of millions, and the operational systems needed to protect both the community and the moderation team.',
     tags: ['Moderation', 'Platform Safety', 'Scale'],
     maturity: 'budding',
-    readTime: '12 min',
-    lastRevised: '2025-06',
   },
   {
     slug: 'community-health-metrics',
@@ -36,8 +30,6 @@ const playbook = [
     description: 'Moving beyond vanity metrics like MAU. A framework for measuring member participation, health, and real product impact.',
     tags: ['Metrics', 'Strategy', 'Analytics'],
     maturity: 'budding',
-    readTime: '10 min',
-    lastRevised: '2025-04',
   },
   {
     slug: 'governance-structures-101',
@@ -45,8 +37,6 @@ const playbook = [
     description: 'When to set up working groups, elected moderators, and community councils, and when simpler structures are more effective.',
     tags: ['Governance', 'Structure', 'Leadership'],
     maturity: 'evergreen',
-    readTime: '9 min',
-    lastRevised: '2025-02',
   },
   {
     slug: 'discord-vs-community-platforms',
@@ -54,8 +44,6 @@ const playbook = [
     description: 'A practical framework for picking community infrastructure based on user habits, technical requirements, and long-term scale.',
     tags: ['Tech Stack', 'Platform', 'Tools'],
     maturity: 'budding',
-    readTime: '7 min',
-    lastRevised: '2025-05',
   },
   {
     slug: 'community-champions-program',
@@ -63,8 +51,6 @@ const playbook = [
     description: 'How to organize and support volunteer community leaders without burning them out.',
     tags: ['Champions', 'Volunteers', 'Leadership'],
     maturity: 'seedling',
-    readTime: '6 min',
-    lastRevised: '2025-07',
   },
 ];
 
@@ -113,7 +99,6 @@ const maturityMap = {
               <a href={`/playbook/${entry.slug}`} class="entry__card card card--clickable card--community" id={`entry-${entry.slug}`}>
                 <div class="entry__meta">
                   <span class={`maturity ${maturity.className}`}>{maturity.label}</span>
-                  <span class="read-time">{entry.readTime} read</span>
                 </div>
                 <h3 class="entry__title">{entry.title}</h3>
                 <p class="entry__desc">{entry.description}</p>
@@ -123,7 +108,6 @@ const maturityMap = {
                   ))}
                 </div>
                 <div class="entry__footer">
-                  <span class="entry__revised">Last revised {entry.lastRevised}</span>
                   <span class="entry__arrow">→</span>
                 </div>
               </a>
@@ -177,7 +161,7 @@ const maturityMap = {
   color: var(--text-faint);
   font-family: var(--font-mono);
 }
-.entry__footer { display: flex; justify-content: space-between; align-items: center; }
+.entry__footer { display: flex; justify-content: flex-end; align-items: center; }
 .entry__revised { font-size: 0.8125rem; color: var(--text-faint); font-family: var(--font-mono); }
 .entry__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
 .entry__card:hover .entry__arrow { color: var(--sage-light); transform: translateX(4px); }

@@ -134,8 +134,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Defending AI agents against inference abuse, context pollution, tool amplification, and human-escalation exhaustion. 
             A practical 14-section operational guide uniting AI governance, compute controls, and community platform defense.
           </p>
-          <div class="featured__footer">
-            <span class="read-time" style="font-weight: 600; color: var(--accent);">25 min practical reference</span>
+          <div class="featured__footer" style="justify-content: flex-end;">
             <span class="featured__arrow" style="font-size: 1.05rem; font-weight: 600; color: var(--accent);">Read the Flagship Playbook →</span>
           </div>
         </a>
@@ -148,7 +147,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3>The Community Onboarding Playbook</h3>
           <p>A step-by-step approach to welcoming new members and setting up long-term retention from day one.</p>
           <div class="featured__footer">
-            <span class="read-time">8 min read</span>
             <span class="featured__arrow">→</span>
           </div>
         </a>
@@ -161,7 +159,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3>Moderation at Scale: What Global Platforms Get Wrong</h3>
           <p>Direct observations from moderating millions of users, and how to keep human moderators from burning out.</p>
           <div class="featured__footer">
-            <span class="read-time">12 min read</span>
             <span class="featured__arrow">→</span>
           </div>
         </a>
@@ -174,7 +171,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3>Participatory Red-Teaming: Community as a Safety Mechanism</h3>
           <p>How bringing community members into adversarial AI testing surfaces real blind spots early.</p>
           <div class="featured__footer">
-            <span class="read-time">10 min read</span>
             <span class="featured__arrow">→</span>
           </div>
         </a>
@@ -187,7 +183,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h3>What the CAIGP Certification Actually Covers</h3>
           <p>An honest breakdown of the Certified AI Governance Professional curriculum, what it teaches, and where practice diverges from theory.</p>
           <div class="featured__footer">
-            <span class="read-time">6 min read</span>
             <span class="featured__arrow">→</span>
           </div>
         </a>
@@ -393,7 +388,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .featured__meta { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); flex-wrap: wrap; }
 .featured__card h3 { font-size: 1.15rem; margin-bottom: var(--space-3); line-height: 1.35; color: #1D1D1F; }
 .featured__card p { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-6); }
-.featured__footer { display: flex; justify-content: space-between; align-items: center; }
+.featured__footer { display: flex; justify-content: flex-end; align-items: center; }
 .featured__arrow { color: var(--text-faint); transition: color var(--transition-fast), transform var(--transition-fast); }
 .featured__card:hover .featured__arrow { color: var(--accent); transform: translateX(4px); }
 
