@@ -1,0 +1,589 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Community Operations Workflow Map"
+  description="An interactive map of how AI agents and human review gates collaborate in live community operations. By Adrian Lee."
+>
+  <div class="workflow-page">
+    <div class="workflow-header container">
+      <div class="section-label"><span class="label">Interactive Architecture</span></div>
+      <h1 class="workflow-title">Community Ops <em>Automation Map</em></h1>
+      <p class="workflow-desc">
+        How AI agents and human judgment collaborate from raw signal to business output.
+        Five parallel workflows running simultaneously across a live community operation.
+      </p>
+      <div class="workflow-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#0071E3;"></span>Signal Input</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#7C3AED;"></span>AI Agent</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#0E7490;"></span>Human Review</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#D97706;"></span>Escalation Gate</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#059669;"></span>Output</span>
+      </div>
+    </div>
+
+    <div class="workflow-canvas-wrap">
+      <div class="workflow-scroll-hint">← Scroll horizontally to explore the full map →</div>
+      <div class="workflow-canvas">
+        <svg id="workflow-svg"
+          viewBox="0 0 1660 840"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="Community Operations Automation Workflow Map"
+          role="img"
+        >
+          <defs>
+            <!-- Animated dash for connectors -->
+            <style>
+              .flow-path {
+                fill: none;
+                stroke-width: 1.5;
+                stroke-dasharray: 6 5;
+                animation: dashFlow 1.6s linear infinite;
+              }
+              .flow-path.flow-signal  { stroke: #93C5FD; }
+              .flow-path.flow-ai      { stroke: #A78BFA; }
+              .flow-path.flow-human   { stroke: #67E8F9; }
+              .flow-path.flow-output  { stroke: #6EE7B7; }
+              .flow-path.flow-gate    { stroke: #FCD34D; }
+
+              @keyframes dashFlow {
+                to { stroke-dashoffset: -22; }
+              }
+
+              .node-box {
+                rx: 10; ry: 10;
+                stroke-width: 1.2;
+              }
+              .node-box.signal   { fill: #EFF6FF; stroke: #93C5FD; }
+              .node-box.ai       { fill: #F5F3FF; stroke: #A78BFA; }
+              .node-box.human    { fill: #ECFEFF; stroke: #67E8F9; }
+              .node-box.output   { fill: #ECFDF5; stroke: #6EE7B7; }
+
+              .node-title {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 11.5px;
+                font-weight: 600;
+                fill: #1D1D1F;
+              }
+              .node-sub {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 9.5px;
+                font-weight: 400;
+                fill: #6E6E73;
+              }
+              .node-badge {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 8px;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+              }
+              .badge-signal  { fill: #0071E3; }
+              .badge-ai      { fill: #7C3AED; }
+              .badge-human   { fill: #0E7490; }
+              .badge-output  { fill: #059669; }
+
+              .col-header {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 9px;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                fill: #86868B;
+              }
+
+              .gate-circle {
+                stroke-width: 1.5;
+                fill: #FFFBEB;
+                stroke: #FCD34D;
+              }
+              .gate-label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 7.5px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                fill: #92400E;
+              }
+
+              .flow-label {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 8.5px;
+                font-weight: 500;
+                fill: #86868B;
+              }
+            </style>
+
+            <!-- Particle dot marker for paths -->
+            <marker id="dot-blue" markerWidth="4" markerHeight="4" refX="2" refY="2">
+              <circle cx="2" cy="2" r="1.5" fill="#0071E3" opacity="0.7"/>
+            </marker>
+            <marker id="dot-purple" markerWidth="4" markerHeight="4" refX="2" refY="2">
+              <circle cx="2" cy="2" r="1.5" fill="#7C3AED" opacity="0.7"/>
+            </marker>
+            <marker id="dot-cyan" markerWidth="4" markerHeight="4" refX="2" refY="2">
+              <circle cx="2" cy="2" r="1.5" fill="#0E7490" opacity="0.7"/>
+            </marker>
+            <marker id="dot-green" markerWidth="4" markerHeight="4" refX="2" refY="2">
+              <circle cx="2" cy="2" r="1.5" fill="#059669" opacity="0.7"/>
+            </marker>
+            <marker id="dot-amber" markerWidth="4" markerHeight="4" refX="2" refY="2">
+              <circle cx="2" cy="2" r="1.5" fill="#D97706" opacity="0.7"/>
+            </marker>
+          </defs>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN HEADERS
+          ═══════════════════════════════════════════════════════ -->
+          <text x="223" y="24" text-anchor="middle" class="col-header">Signal Input</text>
+          <text x="523" y="24" text-anchor="middle" class="col-header">AI Agent</text>
+          <text x="778" y="24" text-anchor="middle" class="col-header">AI Synthesis</text>
+          <text x="1043" y="24" text-anchor="middle" class="col-header">Human Review</text>
+          <text x="1323" y="24" text-anchor="middle" class="col-header">Escalation Gate</text>
+          <text x="1603" y="24" text-anchor="middle" class="col-header">Output</text>
+
+          <!-- Column separator lines -->
+          <line x1="336" y1="32" x2="336" y2="818" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="636" y1="32" x2="636" y2="818" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="876" y1="32" x2="876" y2="818" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="1156" y1="32" x2="1156" y2="818" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="1436" y1="32" x2="1436" y2="818" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 0 — SIGNAL INPUT (cx=223, node width=206)
+               Nodes: x=120 to x=326
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: Discord / TG / Reddit DMs -->
+          <rect x="120" y="62" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="84" class="node-badge badge-signal">PLATFORMS</text>
+          <text x="140" y="100" class="node-title">Discord / TG / Reddit DMs</text>
+          <text x="140" y="116" class="node-sub">arrives every 2 hrs, 9–6</text>
+
+          <!-- Node: X / Twitter Feed -->
+          <rect x="120" y="166" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="188" class="node-badge badge-signal">X / TWITTER</text>
+          <text x="140" y="204" class="node-title">X / Twitter Feed</text>
+          <text x="140" y="220" class="node-sub">company + top 5 rivals</text>
+
+          <!-- Node: Competitor Pages -->
+          <rect x="120" y="270" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="292" class="node-badge badge-signal">COMPETITORS</text>
+          <text x="140" y="308" class="node-title">Competitor Pages &amp; Socials</text>
+          <text x="140" y="324" class="node-sub">events, rewards, draws</text>
+
+          <!-- Node: Finance Reward Status -->
+          <rect x="120" y="374" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="396" class="node-badge badge-signal">FINANCE</text>
+          <text x="140" y="412" class="node-title">Finance Reward Status</text>
+          <text x="140" y="428" class="node-sub">checked Monday AM</text>
+
+          <!-- Node: Past Event Performance -->
+          <rect x="120" y="478" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="500" class="node-badge badge-signal">ARCHIVE</text>
+          <text x="140" y="516" class="node-title">Past Event Performance</text>
+          <text x="140" y="532" class="node-sub">participation, feedback</text>
+
+          <!-- Node: Weekly Topic Log -->
+          <rect x="120" y="582" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="604" class="node-badge badge-signal">CM LOG</text>
+          <text x="140" y="620" class="node-title">Weekly Topic Log</text>
+          <text x="140" y="636" class="node-sub">accumulated ad hoc</text>
+
+          <!-- Node: Channel Nav Friction -->
+          <rect x="120" y="686" width="206" height="68" rx="10" class="node-box signal"/>
+          <text x="140" y="708" class="node-badge badge-signal">USERS</text>
+          <text x="140" y="724" class="node-title">Channel Nav Friction</text>
+          <text x="140" y="740" class="node-sub">users cannot find channels</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 1 — AI AGENT (cx=523, node x=420 to x=626)
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: DM Triage + Reply -->
+          <rect x="420" y="62" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="84" class="node-badge badge-ai">CLAUDE</text>
+          <text x="440" y="100" class="node-title">DM Triage + Reply Draft</text>
+          <text x="440" y="116" class="node-sub">FIFO, severity jumps queue</text>
+
+          <!-- Node: Sentiment Scan -->
+          <rect x="420" y="166" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="188" class="node-badge badge-ai">GROK</text>
+          <text x="440" y="204" class="node-title">Sentiment Scan</text>
+          <text x="440" y="220" class="node-sub">&gt;100 shares triggers review</text>
+
+          <!-- Node: Competitor Digest Draft -->
+          <rect x="420" y="270" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="292" class="node-badge badge-ai">CLAUDE</text>
+          <text x="440" y="308" class="node-title">Competitor Digest Draft</text>
+          <text x="440" y="324" class="node-sub">flags fresh formats &amp; moves</text>
+
+          <!-- Node: Event Idea Draft -->
+          <rect x="420" y="478" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="500" class="node-badge badge-ai">CLAUDE</text>
+          <text x="440" y="516" class="node-title">Event Idea Draft</text>
+          <text x="440" y="532" class="node-sub">matched to calendar + culture</text>
+
+          <!-- Node: Talking-Points Doc -->
+          <rect x="420" y="582" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="604" class="node-badge badge-ai">CLAUDE</text>
+          <text x="440" y="620" class="node-title">Talking-Points Doc</text>
+          <text x="440" y="636" class="node-sub">formats weekly log for 1:1</text>
+
+          <!-- Node: Nav Friction Report -->
+          <rect x="420" y="686" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="440" y="708" class="node-badge badge-ai">CLAUDE</text>
+          <text x="440" y="724" class="node-title">Nav Friction Report</text>
+          <text x="440" y="740" class="node-sub">flags dead or missing channels</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 1.5 — AI SYNTHESIS (cx=778, x=675 to x=881)
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: Incident Report Draft -->
+          <rect x="675" y="206" width="206" height="68" rx="10" class="node-box ai"/>
+          <text x="695" y="228" class="node-badge badge-ai">CLAUDE</text>
+          <text x="695" y="244" class="node-title">Incident Report Draft</text>
+          <text x="695" y="260" class="node-sub">summary + post feasibility</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 2 — HUMAN REVIEW (cx=1043, x=940 to x=1146)
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: CM Edge-Case Review -->
+          <rect x="940" y="62" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="84" class="node-badge badge-human">CM</text>
+          <text x="960" y="100" class="node-title">CM Edge-Case Review</text>
+          <text x="960" y="116" class="node-sub">unique cases only, rest auto</text>
+
+          <!-- Node: Internal Team Chat -->
+          <rect x="940" y="244" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="266" class="node-badge badge-human">TEAM</text>
+          <text x="960" y="282" class="node-title">Internal Team Chat</text>
+          <text x="960" y="298" class="node-sub">peer input on the incident</text>
+
+          <!-- Node: CM Chases Paperwork -->
+          <rect x="940" y="374" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="396" class="node-badge badge-human">CM</text>
+          <text x="960" y="412" class="node-title">CM Chases Paperwork</text>
+          <text x="960" y="428" class="node-sub">only if reward hiccups occur</text>
+
+          <!-- Node: CM Creative Selection -->
+          <rect x="940" y="478" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="500" class="node-badge badge-human">CM</text>
+          <text x="960" y="516" class="node-title">CM Creative Selection</text>
+          <text x="960" y="532" class="node-sub">tied to individual KPI target</text>
+
+          <!-- Node: CM + Manager 1:1 -->
+          <rect x="940" y="582" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="604" class="node-badge badge-human">CM</text>
+          <text x="960" y="620" class="node-title">CM + Manager 1:1</text>
+          <text x="960" y="636" class="node-sub">30 min, KPI + weekly trends</text>
+
+          <!-- Node: Manager Sign-off -->
+          <rect x="940" y="686" width="206" height="68" rx="10" class="node-box human"/>
+          <text x="960" y="708" class="node-badge badge-human">MANAGER</text>
+          <text x="960" y="724" class="node-title">Manager Sign-off</text>
+          <text x="960" y="740" class="node-sub">channel add or remove approval</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 2.5 — ESCALATION GATE (cx=1323, x=1220 to x=1426)
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: Team Lead Escalation -->
+          <rect x="1220" y="244" width="206" height="68" rx="10" class="node-box" style="fill:#FFFBEB;stroke:#FCD34D;stroke-width:1.5;"/>
+          <text x="1240" y="266" class="node-badge" style="fill:#D97706;">ESCALATION</text>
+          <text x="1240" y="282" class="node-title">Team Lead Call</text>
+          <text x="1240" y="298" class="node-sub">post it now, or hold?</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               COLUMN 3 — OUTPUT (cx=1603, x=1500 to x=1660)
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Node: Reply Sent -->
+          <rect x="1500" y="62" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="84" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="100" class="node-title">Reply Sent</text>
+          <text x="1520" y="116" class="node-sub">template or fresh draft</text>
+
+          <!-- Node: Public Announcement -->
+          <rect x="1500" y="166" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="188" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="204" class="node-title">Public Announcement</text>
+          <text x="1520" y="220" class="node-sub">addresses viral complaint</text>
+
+          <!-- Node: Reward Released -->
+          <rect x="1500" y="374" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="396" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="412" class="node-title">Reward Released</text>
+          <text x="1520" y="428" class="node-sub">funds reach the winner</text>
+
+          <!-- Node: Event Launched -->
+          <rect x="1500" y="478" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="500" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="516" class="node-title">Event Launched</text>
+          <text x="1520" y="532" class="node-sub">new engagement campaign</text>
+
+          <!-- Node: KPI Alignment -->
+          <rect x="1500" y="582" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="604" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="620" class="node-title">KPI + Trend Alignment</text>
+          <text x="1520" y="636" class="node-sub">shapes next-week approach</text>
+
+          <!-- Node: Channel Restructured -->
+          <rect x="1500" y="686" width="148" height="68" rx="10" class="node-box output"/>
+          <text x="1520" y="708" class="node-badge badge-output">OUTPUT</text>
+          <text x="1520" y="724" class="node-title">Channel Restructured</text>
+          <text x="1520" y="740" class="node-sub">added or removed live</text>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW CONNECTORS — SIGNAL → AI AGENT
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- DM → Claude DM Triage -->
+          <path d="M 326 96 C 370 96 376 96 420 96" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- X Feed → Grok Sentiment -->
+          <path d="M 326 200 C 370 200 376 200 420 200" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- Competitor Pages → Claude Competitor Digest -->
+          <path d="M 326 304 C 370 304 376 304 420 304" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- Finance → Claude (Reward path goes to CM finance chase at col2) -->
+          <path d="M 326 408 C 460 408 460 408 940 408" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- Event History → Claude Event Ideas -->
+          <path d="M 326 512 C 370 512 376 512 420 512" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- Weekly Log → Claude Meeting Doc -->
+          <path d="M 326 616 C 370 616 376 616 420 616" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- Nav Signals → Claude Nav Report -->
+          <path d="M 326 720 C 370 720 376 720 420 720" class="flow-path flow-signal" marker-end="url(#dot-blue)"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW CONNECTORS — AI → AI SYNTHESIS
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Grok Sentiment → Incident Report Draft (arcs up slightly) -->
+          <path d="M 626 200 C 650 200 655 240 675 240" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW CONNECTORS — AI → HUMAN REVIEW
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Claude DM Triage → CM Edge-Case Review -->
+          <path d="M 626 96 C 780 96 786 96 940 96" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- Incident Report → Internal Team Chat -->
+          <path d="M 881 240 C 910 240 916 278 940 278" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- Claude Event Ideas → CM Creative Selection -->
+          <path d="M 626 512 C 780 512 786 512 940 512" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- Claude Meeting Doc → CM 1:1 -->
+          <path d="M 626 616 C 780 616 786 616 940 616" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- Claude Nav Report → Manager Sign-off -->
+          <path d="M 626 720 C 780 720 786 720 940 720" class="flow-path flow-ai" marker-end="url(#dot-purple)"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW CONNECTORS — HUMAN REVIEW → ESCALATION GATE
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- Internal Team Chat → Team Lead Call -->
+          <path d="M 1146 278 C 1183 278 1183 278 1220 278" class="flow-path flow-gate" marker-end="url(#dot-amber)"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW CONNECTORS — HUMAN REVIEW / GATE → OUTPUT
+          ═══════════════════════════════════════════════════════ -->
+
+          <!-- CM Edge-Case Review → Reply Sent -->
+          <path d="M 1146 96 C 1320 96 1326 96 1500 96" class="flow-path flow-output" marker-end="url(#dot-green)"/>
+
+          <!-- Team Lead Call → Public Announcement -->
+          <path d="M 1426 278 C 1463 278 1463 200 1500 200" class="flow-path flow-gate" marker-end="url(#dot-amber)"/>
+
+          <!-- CM Finance Chase → Reward Released -->
+          <path d="M 1146 408 C 1320 408 1326 408 1500 408" class="flow-path flow-output" marker-end="url(#dot-green)"/>
+
+          <!-- CM Creative Selection → Event Launched -->
+          <path d="M 1146 512 C 1320 512 1326 512 1500 512" class="flow-path flow-output" marker-end="url(#dot-green)"/>
+
+          <!-- CM 1:1 → KPI Alignment -->
+          <path d="M 1146 616 C 1320 616 1326 616 1500 616" class="flow-path flow-output" marker-end="url(#dot-green)"/>
+
+          <!-- Manager Sign-off → Channel Restructured -->
+          <path d="M 1146 720 C 1320 720 1326 720 1500 720" class="flow-path flow-output" marker-end="url(#dot-green)"/>
+
+          <!-- ═══════════════════════════════════════════════════════
+               FLOW LABELS (mid-connector annotations)
+          ═══════════════════════════════════════════════════════ -->
+          <text x="372" y="90" text-anchor="middle" class="flow-label">auto-triaged</text>
+          <text x="372" y="194" text-anchor="middle" class="flow-label">scan</text>
+          <text x="372" y="298" text-anchor="middle" class="flow-label">digest</text>
+          <text x="372" y="506" text-anchor="middle" class="flow-label">draft</text>
+          <text x="372" y="610" text-anchor="middle" class="flow-label">format</text>
+          <text x="372" y="714" text-anchor="middle" class="flow-label">report</text>
+          <text x="1183" y="272" text-anchor="middle" class="flow-label">escalate</text>
+          <text x="1323" y="90" text-anchor="middle" class="flow-label">reply live</text>
+          <text x="1323" y="402" text-anchor="middle" class="flow-label">released</text>
+          <text x="1323" y="506" text-anchor="middle" class="flow-label">launch</text>
+          <text x="1323" y="610" text-anchor="middle" class="flow-label">align</text>
+          <text x="1323" y="714" text-anchor="middle" class="flow-label">restructure</text>
+
+        </svg>
+      </div>
+    </div>
+
+    <!-- FLOW KEY SECTION -->
+    <div class="workflow-flows container">
+      <div class="section-label"><span class="label">The five parallel workflows</span></div>
+      <div class="flows-grid">
+        <div class="flow-card">
+          <div class="flow-card__num" style="background:#EFF6FF;color:#0071E3;">01</div>
+          <h3>DM Sweep &amp; Reply</h3>
+          <p>Claude triages incoming community DMs by severity. Routine replies go out automatically. Edge cases surface to the CM for review before sending.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card__num" style="background:#F5F3FF;color:#7C3AED;">02</div>
+          <h3>Sentiment Escalation</h3>
+          <p>Grok scans X and community channels continuously. High-virality signals trigger an incident report draft. The team reviews and decides: post, hold, or escalate to Team Lead.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card__num" style="background:#FFFBEB;color:#D97706;">03</div>
+          <h3>Competitor Intel</h3>
+          <p>Claude digests competitor activity weekly and flags new formats and reward structures. The CM reviews the report and decides which moves are worth responding to.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card__num" style="background:#ECFDF5;color:#059669;">04</div>
+          <h3>Event &amp; Reward Assurance</h3>
+          <p>Finance reward status feeds directly into the pipeline. Any hiccups route to the CM for paperwork chase. Event ideas drafted by Claude are shortlisted by the CM against their KPIs.</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card__num" style="background:#ECFEFF;color:#0E7490;">05</div>
+          <h3>Meeting Prep &amp; Channel Architecture</h3>
+          <p>Weekly topic logs are auto-formatted into 1:1 talking points. Nav friction reports flag structural channel issues for manager sign-off before any restructuring goes live.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="workflow-cta container">
+      <div class="workflow-cta__inner card card--featured">
+        <h2>Want this kind of operational architecture for your community?</h2>
+        <p>I design and implement human-AI hybrid workflows for community and customer operations teams.</p>
+        <div class="workflow-cta__btns">
+          <a href="/services" class="btn btn-blue btn-lg">View advisory services</a>
+          <a href="/contact" class="btn btn-outline btn-lg">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+.workflow-page { padding-top: calc(var(--nav-h) + var(--space-10)); padding-bottom: var(--space-20); }
+
+.workflow-header { margin-bottom: var(--space-10); max-width: 820px; }
+.workflow-title {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-5);
+}
+.workflow-title em { color: var(--accent); font-style: italic; }
+.workflow-desc { font-size: 1.0625rem; color: var(--text-muted); line-height: 1.7; margin-bottom: var(--space-6); max-width: 640px; }
+
+.workflow-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.workflow-scroll-hint {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  text-align: center;
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.04em;
+}
+
+.workflow-canvas-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 var(--space-6) var(--space-4);
+  -webkit-overflow-scrolling: touch;
+}
+.workflow-canvas {
+  min-width: 1660px;
+  background: #FAFAFA;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 12px 24px 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.workflow-canvas svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flow card section */
+.workflow-flows {
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-12);
+}
+.flows-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+@media (max-width: 1100px) { .flows-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px)  { .flows-grid { grid-template-columns: 1fr; } }
+
+.flow-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: var(--space-6);
+}
+.flow-card__num {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+.flow-card h3 { font-size: 1rem; margin-bottom: var(--space-3); }
+.flow-card p  { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+/* CTA */
+.workflow-cta { margin-top: var(--space-4); }
+.workflow-cta__inner { padding: var(--space-10); text-align: center; }
+.workflow-cta__inner h2 { font-size: clamp(1.4rem, 2.8vw, 2rem); margin-bottom: var(--space-4); }
+.workflow-cta__inner p  { color: var(--text-muted); margin-bottom: var(--space-8); max-width: 480px; margin-inline: auto; }
+.workflow-cta__btns { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+</style>

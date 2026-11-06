@@ -189,6 +189,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- WORKFLOW TEASER -->
+  <section class="workflow-teaser section--sm" aria-label="Community Operations Workflow">
+    <div class="container">
+      <div class="workflow-teaser__inner">
+        <div class="workflow-teaser__text">
+          <div class="section-label"><span class="label">Interactive Architecture</span></div>
+          <h2>Community Ops Automation Map</h2>
+          <p>See how AI agents and human review gates work together, from raw signal to business output. A live diagram of the operational systems I design and run.</p>
+          <a href="/workflow" class="btn btn-outline" style="margin-top:1rem; display:inline-flex; align-items:center; gap:0.5rem;">
+            Explore the Interactive Map <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+        <div class="workflow-teaser__preview" aria-hidden="true">
+          <div class="workflow-preview-card">
+            <div class="wpc-flow">
+              <span class="wpc-node wpc-signal">Signal</span>
+              <span class="wpc-arrow">&#x25b6;</span>
+              <span class="wpc-node wpc-ai">AI Triage</span>
+              <span class="wpc-arrow">&#x25b6;</span>
+              <span class="wpc-node wpc-human">Human Review</span>
+              <span class="wpc-arrow">&#x25b6;</span>
+              <span class="wpc-node wpc-output">Output</span>
+            </div>
+            <p class="wpc-label">5-stage automated workflow</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PHILOSOPHY -->
   <section class="philosophy section--sm" aria-labelledby="philosophy-heading">
     <div class="container">
@@ -433,6 +463,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .featured__grid { grid-template-columns: 1fr; }
   .featured__header { flex-direction: column; align-items: flex-start; }
 }
+
+/* WORKFLOW TEASER */
+.workflow-teaser { background: var(--bg); border-top: 1px solid var(--border); }
+.workflow-teaser__inner { display: grid; grid-template-columns: 1fr 320px; gap: var(--space-16); align-items: center; }
+.workflow-teaser__text h2 { font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--text); margin-bottom: var(--space-3); }
+.workflow-teaser__text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.65; max-width: 48ch; }
+.workflow-preview-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.05); }
+.wpc-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.wpc-node { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; padding: 0.3rem 0.65rem; border-radius: 999px; white-space: nowrap; }
+.wpc-signal { background: #EFF6FF; color: #1D4ED8; }
+.wpc-ai { background: #F5F3FF; color: #6D28D9; }
+.wpc-human { background: #ECFEFF; color: #0E7490; }
+.wpc-output { background: #F0FDF4; color: #15803D; }
+.wpc-arrow { color: var(--text-muted); font-size: 0.65rem; }
+.wpc-label { font-size: 0.8rem; color: var(--text-muted); margin: 0; font-family: var(--font-mono); }
+@media (max-width: 768px) { .workflow-teaser__inner { grid-template-columns: 1fr; } .workflow-teaser__preview { display: none; } }
 
 /* PHILOSOPHY (Unified Apple Light Section) */
 .philosophy {
